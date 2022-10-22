@@ -15,6 +15,9 @@ npm run dev
 *** Referances ***
 https://www.npmjs.com/package/pathfinding
 
+Isometric game dev stuff
+https://hub.packtpub.com/going-isometric/
+
 Change colour saturation
 https://stackoverflow.com/questions/40353049/how-can-i-adjust-the-huse-saturation-and-lightness-of-in-image-in-html5-canvas
 
