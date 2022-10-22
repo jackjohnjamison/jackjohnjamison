@@ -4,35 +4,12 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Orcs</title>
+    <title>Tiles</title>
 
-    <link rel="stylesheet" href="styles.scss">
-    <script type="module" src="app"></script>
+    <link rel="stylesheet" href="scss/styles.scss">
+    <script type="module" src="lib"></script>
   </head>
   <body>
-    <div class="wrapper">
-
-      <div class="toolbar">
-        <form id="controlType"  name="control-type" class="margin-right-10">
-          <input type="radio" id="keyboardRadio" value="keyboard" class="margin-right-10" name="controlType" checked><label for="keyboardRadio">Keyboard Controls</label>
-          <input type="radio" id="pathfindingRadio" value="pathfinding" class="margin-right-10" name="controlType"><label for="pathfindingRadio">Edit Mode</label>
-        </form>
-
-        <select id="terrainType" name="terrainType">
-          <option value="wall">wall</option>
-          <option value="floor">floor</option>
-          <option value="void">void</option>
-        </select>
-
-        <div class="margin-left-auto">
-          <input type="text" id="saveName" value="tile-map">
-          <button id="saveButton">Save</button>
-          <button id="loadButton">Load</button>
-        </div>
-      </div>
-
-      <div id="rootElement"></div>
-
-    </div>
+    <div id="root"></div>
   </body>
 </html>
