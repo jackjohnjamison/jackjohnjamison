@@ -9,8 +9,9 @@ npm run dev
 - Should the entity map use arrays and not objects at tile level?
 - Stop redrawing when objects are not in motion or the camera is not being panned. 
 - Undo button
-- Create entity interface. Persistant entities on load.
+- Create entity interface.
 - Actually design a game
+- Maybe go back to a large scrolling canvas for performance reasons? Would that cause UI issues again?
 
 *** Referances ***
 https://www.npmjs.com/package/pathfinding
@@ -45,5 +46,5 @@ https://jsbench.me/
 *** Known bugs and issues ***
 - Collisions "work" but they feel a little off and could use some tuning
 - Add a favicon already
-- Black screen of doom!
+- Black screen of doom! (maybe fixed)
 
