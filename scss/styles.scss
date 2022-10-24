@@ -42,6 +42,14 @@ body {
   overflow: hidden;
   background-color: #000;
   position: relative;
+
+  #canvasWrapper {
+    position: relative;
+
+    canvas {
+      position: absolute;
+    }
+  }
 }
 
 .monitor {
