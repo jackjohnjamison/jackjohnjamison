@@ -2,6 +2,8 @@ import { loadImage } from "./load-image";
 
 const imageAssetPath = import.meta.env.DEV ? "./images/" : "/tiles/src/images/";
 
+console.log("AM I DEV???", import.meta.env.DEV);
+
 const sprites = {
   terracotta: [
     {
