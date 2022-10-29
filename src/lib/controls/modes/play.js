@@ -91,9 +91,6 @@ playMode.set = () => {
 
     const { translate } = scene.view;
 
-    const hWidth = tileWidth / 2;
-    const hHeight = tileHeight / 2;
-
     const startX = mouse.dragStart.x;
     const startY = mouse.dragStart.y;
 
@@ -101,20 +98,16 @@ playMode.set = () => {
     const dragY = mouse.drag.y + translate.y;
 
     const tl = {
-      x: startX - hWidth,
-      y: startY - hHeight,
+      x: startX,
+      y: startY,
     };
     const bl = {
-      x: startX - hWidth,
-      y: startY - dragY + hHeight,
+      x: startX,
+      y: startY - dragY,
     };
     const tr = {
-      x: startX - dragX + hWidth,
-      y: startY - hHeight,
-    };
-    const br = {
-      x: startX - dragX + hWidth,
-      y: startY - dragY + hHeight,
+      x: startX - dragX,
+      y: startY,
     };
 
     ctx.rect(startX, startY, -dragX, -dragY);
@@ -124,33 +117,26 @@ playMode.set = () => {
     const tr_index = positionToTileIndex(tr);
     const bl_index = positionToTileIndex(bl);
 
-    highlightTile(tl_index, "red");
-    highlightTile(positionToTileIndex(bl), "green");
-    highlightTile(tr_index, "blue");
-    highlightTile(positionToTileIndex(br), "yellow");
-
-    const indexDiffX = tr_index.x - tl_index.x + 1;
-    const indexDiffY = bl_index.y - tl_index.y + 1;
+    const indexDiffX = tr_index.x - tl_index.x;
+    const indexDiffY = bl_index.y - tl_index.y;
 
     for (let i = 0; i < indexDiffX; i++) {
       for (let j = 0; j < indexDiffY; j++) {
-        highlightTile(
-          {
-            x: tl_index.x + i - j,
-            y: tl_index.y + i + j,
-          },
-          "yellow"
-        );
+        const tile = {
+          x: tl_index.x + i - j,
+          y: tl_index.y + i + j,
+        };
+
+        highlightTile(tile, "yellow");
       }
 
       for (let j = 0; j < indexDiffY; j++) {
-        highlightTile(
-          {
-            x: tl_index.x + i - 1 - j,
-            y: tl_index.y + i + j,
-          },
-          "red"
-        );
+        const tile = {
+          x: tl_index.x + i - j,
+          y: tl_index.y + i + 1 + j,
+        };
+
+        highlightTile(tile, "red");
       }
     }
 
