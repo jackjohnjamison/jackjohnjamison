@@ -142,6 +142,16 @@ playMode.set = () => {
           "yellow"
         );
       }
+
+      for (let j = 0; j < indexDiffY; j++) {
+        highlightTile(
+          {
+            x: tl_index.x + i - 1 - j,
+            y: tl_index.y + i + j,
+          },
+          "red"
+        );
+      }
     }
 
     /////////////////////////////////////////////////////////////////////////////
