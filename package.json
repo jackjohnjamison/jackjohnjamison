@@ -2,9 +2,8 @@
   "name": "tiles",
   "private": false,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "cd src && npm run dev",
-    "build": "cd src && npm run build"
+    "build": "node ./scripts/clear-assets.js && cd src && npm run build"
   }
 }
