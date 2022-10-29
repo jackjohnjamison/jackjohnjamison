@@ -19,11 +19,11 @@ const playMode = {};
 const noop = () => {};
 
 playMode.set = () => {
-  const { hoveredTile, mouse, player, ctx } = scene;
+  const { hoveredTile, mouse, player, ctx, view } = scene;
 
   mouse.onMouseMove = () => {
     // if (mouse.buttonCode === 1) {
-    //   panCameraTo(-mouse.drag.x, -mouse.drag.y);
+    //   panCameraTo(-dragX, -dragY);
     // }
   };
 
@@ -89,90 +89,41 @@ playMode.set = () => {
     ctx.strokeStyle = "aqua";
     ctx.beginPath();
 
-    // const tl = { x: mouse.dragStart.x, y: mouse.dragStart.y };
-    // const bl = { x: mouse.dragStart.x, y: mouse.dragStart.y - mouse.drag.y };
-    // const tr = { x: mouse.dragStart.x - mouse.drag.x, y: mouse.dragStart.y };
-    // const br = {
-    //   x: mouse.dragStart.x - mouse.drag.x,
-    //   y: mouse.dragStart.y - mouse.drag.y,
-    // };
+    const { translate } = scene.view;
 
     const hWidth = tileWidth / 2;
     const hHeight = tileHeight / 2;
 
+    const startX = mouse.dragStart.x;
+    const startY = mouse.dragStart.y;
+
+    const dragX = mouse.drag.x + translate.x;
+    const dragY = mouse.drag.y + translate.y;
+
     const tl = {
-      x: mouse.dragStart.x - hWidth,
-      y: mouse.dragStart.y - hHeight,
+      x: startX - hWidth,
+      y: startY - hHeight,
     };
     const bl = {
-      x: mouse.dragStart.x - hWidth,
-      y: mouse.dragStart.y - mouse.drag.y + hHeight,
+      x: startX - hWidth,
+      y: startY - dragY + hHeight,
     };
     const tr = {
-      x: mouse.dragStart.x - mouse.drag.x + hWidth,
-      y: mouse.dragStart.y - hHeight,
+      x: startX - dragX + hWidth,
+      y: startY - hHeight,
     };
     const br = {
-      x: mouse.dragStart.x - mouse.drag.x + hWidth,
-      y: mouse.dragStart.y - mouse.drag.y + hHeight,
+      x: startX - dragX + hWidth,
+      y: startY - dragY + hHeight,
     };
 
-    ctx.rect(
-      mouse.dragStart.x,
-      mouse.dragStart.y,
-      -mouse.drag.x,
-      -mouse.drag.y
-    );
+    ctx.rect(startX, startY, -dragX, -dragY);
     ctx.stroke();
 
-    highlightTile(positionToTileIndex(tl), "blue");
-    highlightTile(positionToTileIndex(bl), "blue");
+    highlightTile(positionToTileIndex(tl), "red");
+    highlightTile(positionToTileIndex(bl), "green");
     highlightTile(positionToTileIndex(tr), "blue");
-    highlightTile(positionToTileIndex(br), "blue");
-
-    const tlTileIndex = positionToTileIndex(tl);
-    const trTileIndex = positionToTileIndex(tr);
-
-    const xDiff = trTileIndex.x - tlTileIndex.x;
-    const yDiff = trTileIndex.y - tlTileIndex.y;
-
-    const maxDiff = Math.max(xDiff, yDiff);
-
-    // const rangeArray = Array.from(
-    //   { length: maxDiff },
-    //   (_, i) => i + tlTileIndex.x
-    // );
-
-    // rangeArray.forEach((tileX, i) => {
-    //   highlightTile({ x: tileX, y: tlTileIndex.y + i + 1 }, "purple");
-    // });
-
-    // const tileIndexToPosition = ({ x, y }) => {
-    //   const { origin } = scene.view;
-
-    //   return {
-    //     x: (x * tileWidth) / 2 + (y * tileWidth) / 2 + origin.x,
-    //     y: (y * tileHeight) / 2 - (x * tileHeight) / 2 + origin.y,
-    //   };
-    // };
-
-    console.log(tl.x);
-
-    const isoToPos = ({ x, y }) => {
-      return {
-        x: x / 2 + y / 2 + tlTileIndex.x,
-        y: y / 2 - x / 2 + tlTileIndex.y,
-      };
-    };
-
-    for (let x = tlTileIndex.x; x < tlTileIndex.x + xDiff; x++) {
-      for (let y = tlTileIndex.y; y < tlTileIndex.y + yDiff; y++) {
-        const pos = isoToPos({ x: -x, y: y });
-        // console.log(pos.y, -pos.y);
-        // const pos = tileIndexToPosition({ x, y });
-        highlightTile({ x: pos.x, y: pos.y }, "purple");
-      }
-    }
+    highlightTile(positionToTileIndex(br), "yellow");
 
     /////////////////////////////////////////////////////////////////////////////
   };
