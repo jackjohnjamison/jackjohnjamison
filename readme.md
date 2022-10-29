@@ -1,20 +1,26 @@
-To run locally enter in the console
+To run locally for the first time enter in the console:
+cd src
 npm i
 npm run dev
+
+After this you can just use:
+npm run dev
+
+Build changes with:
+npm run build
 
 Website
 https://jackjohnjamison.github.io/tiles/
 
 *** TODO ***
-- Maintain origional search path while moving
 - Ongoing refactoring the mess
 - To class or not to class? Get advice so you can ignore it
 - Should the entity map use arrays and not objects at tile level?
-- Stop redrawing when objects are not in motion or the camera is not being panned. 
+- Stop redrawing when objects are not in motion or the camera is not being panned
 - Undo button
-- Create entity interface.
+- Create entity interface
 - Actually design a game
-- Maybe go back to a large scrolling canvas for performance reasons? Would that cause UI issues again?
+- Learn markdown
 
 *** Referances ***
 https://www.npmjs.com/package/pathfinding
@@ -47,7 +53,5 @@ Benchmark
 https://jsbench.me/
 
 *** Known bugs and issues ***
-- Collisions "work" but they feel a little off and could use some tuning
 - Add a favicon already
 - Black screen of doom! (maybe fixed)
-
