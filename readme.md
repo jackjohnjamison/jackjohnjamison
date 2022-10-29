@@ -2,6 +2,9 @@ To run locally enter in the console
 npm i
 npm run dev
 
+Website
+https://jackjohnjamison.github.io/tiles/
+
 *** TODO ***
 - Maintain origional search path while moving
 - Ongoing refactoring the mess
