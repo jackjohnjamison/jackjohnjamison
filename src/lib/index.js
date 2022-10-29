@@ -1,8 +1,10 @@
-console.log("AM I PROD???", import.meta.env.PROD);
-
 import { scene } from "./scene";
-import { Root } from "../jsx/root";
+import { sprites } from "./sprites";
 
-root.replaceWith(Root());
-scene.start("vista");
-window.dump = () => console.log(scene);
+const start = async () => {
+  await sprites.load();
+  scene.start("vista");
+  window.dump = () => console.log(scene);
+};
+
+start();

@@ -1,3 +1,4 @@
+import { Root } from "../../jsx/root";
 import { createTileMapFromParams, loadMapFromImport } from "../map";
 import { setView } from "./set-view";
 import { initSaveLoad } from "./save-load";
@@ -14,6 +15,9 @@ const scene = {};
 
 // Sets parts of the scene that don't change between map loads
 scene.start = async (map) => {
+  const root = document.getElementById("root");
+  root.replaceWith(Root());
+
   // Set canvas and context
   scene.canvas = document.createElement("canvas");
   scene.ctx = scene.canvas.getContext("2d");
