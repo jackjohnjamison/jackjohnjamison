@@ -1,6 +1,8 @@
 import { loadImage } from "./load-image";
 
-const imageAssetPath = import.meta.env.DEV ? "./images/" : "/tiles/src/images/";
+const imageAssetPath = import.meta.env.PROD
+  ? "/tiles/src/images/"
+  : "./images/";
 
 console.log("AM I DEV???", import.meta.env.DEV);
 

@@ -1,4 +1,4 @@
-console.log("AM I DEV???", import.meta.env.DEV);
+console.log("AM I PROD???", import.meta.env.PROD);
 
 import { scene } from "./scene";
 import { Root } from "../jsx/root";
