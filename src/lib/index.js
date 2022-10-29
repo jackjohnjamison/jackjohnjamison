@@ -1,3 +1,5 @@
+console.log("AM I DEV???", import.meta.env.DEV);
+
 import { scene } from "./scene";
 import { Root } from "../jsx/root";
 
