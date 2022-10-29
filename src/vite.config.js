@@ -3,4 +3,8 @@ export default {
     jsxFactory: "h",
     jsxFragment: "Fragment",
   },
+  build: {
+    target: "esnext",
+    outDir: "../",
+  },
 };
