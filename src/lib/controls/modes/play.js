@@ -117,6 +117,8 @@ playMode.set = () => {
       y: startY - dragY + hHeight,
     };
 
+    console.log(translate.x);
+
     ctx.rect(startX, startY, -dragX, -dragY);
     ctx.stroke();
 

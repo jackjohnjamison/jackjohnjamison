@@ -19,6 +19,9 @@ const panCameraKeys = (delta) => {
   translate.x -= velocityX;
   translate.y -= velocityY;
 
+  translate.x = Math.round(translate.x);
+  translate.y = Math.round(translate.y);
+
   velocityX *= friction;
   velocityY *= friction;
 
@@ -28,8 +31,8 @@ const panCameraKeys = (delta) => {
 // TODO auto scroll function for when the player nears the edges of the map
 const panCameraTo = (x, y) => {
   const { translate } = scene.view;
-  translate.x = x;
-  translate.y = y;
+  translate.x = Math.round(x);
+  translate.y = Math.round(y);
   scene.ctx.setTransform(1, 0, 0, 1, x, y);
 };
 
