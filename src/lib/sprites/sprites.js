@@ -1,150 +1,152 @@
 import { loadImage } from "./load-image";
 
+const imageAssetPath = import.meta.env.DEV ? "./images/" : "/tiles/src/images/";
+
 const sprites = {
   terracotta: [
     {
       yOffset: 0,
-      data: await loadImage("../../images/terracotta1.png"),
+      data: await loadImage(`${imageAssetPath}terracotta1.png`),
     },
     {
       yOffset: 0,
-      data: await loadImage("../../images/terracotta2.png"),
+      data: await loadImage(`${imageAssetPath}terracotta2.png`),
     },
     {
       yOffset: 0,
-      data: await loadImage("../../images/terracotta3.png"),
+      data: await loadImage(`${imageAssetPath}terracotta3.png`),
     },
     {
       yOffset: 0,
-      data: await loadImage("../../images/terracotta4.png"),
+      data: await loadImage(`${imageAssetPath}terracotta4.png`),
     },
   ],
 
   cube: [
     {
       yOffset: 33,
-      data: await loadImage("../../images/cube1.png"),
+      data: await loadImage(`${imageAssetPath}cube1.png`),
     },
     {
       yOffset: 33,
-      data: await loadImage("../../images/cube2.png"),
+      data: await loadImage(`${imageAssetPath}cube2.png`),
     },
     {
       yOffset: 33,
-      data: await loadImage("../../images/cube3.png"),
+      data: await loadImage(`${imageAssetPath}cube3.png`),
     },
   ],
 
   grass: [
     {
       yOffset: 2,
-      data: await loadImage("../../images/grass1.png"),
+      data: await loadImage(`${imageAssetPath}grass1.png`),
     },
     {
       yOffset: 2,
-      data: await loadImage("../../images/grass2.png"),
+      data: await loadImage(`${imageAssetPath}grass2.png`),
     },
     {
       yOffset: 2,
-      data: await loadImage("../../images/grass3.png"),
+      data: await loadImage(`${imageAssetPath}grass3.png`),
     },
     {
       yOffset: 2,
-      data: await loadImage("../../images/grass4.png"),
+      data: await loadImage(`${imageAssetPath}grass4.png`),
     },
   ],
 
   water: [
     {
       yOffset: -3,
-      data: await loadImage("../../images/water1.png"),
+      data: await loadImage(`${imageAssetPath}water1.png`),
     },
     {
       yOffset: -3,
-      data: await loadImage("../../images/water2.png"),
+      data: await loadImage(`${imageAssetPath}water2.png`),
     },
   ],
 
   mountain: [
     {
       yOffset: 14,
-      data: await loadImage("../../images/mountain1.png"),
+      data: await loadImage(`${imageAssetPath}mountain1.png`),
     },
     {
       yOffset: 12,
-      data: await loadImage("../../images/mountain2.png"),
+      data: await loadImage(`${imageAssetPath}mountain2.png`),
     },
     {
       yOffset: 14,
-      data: await loadImage("../../images/mountain3.png"),
+      data: await loadImage(`${imageAssetPath}mountain3.png`),
     },
   ],
 
   mountainTop: [
     {
       yOffset: 14,
-      data: await loadImage("../../images/mountain1-top.png"),
+      data: await loadImage(`${imageAssetPath}mountain1-top.png`),
     },
     {
       yOffset: 12,
-      data: await loadImage("../../images/mountain2-top.png"),
+      data: await loadImage(`${imageAssetPath}mountain2-top.png`),
     },
     {
       yOffset: 14,
-      data: await loadImage("../../images/mountain3-top.png"),
+      data: await loadImage(`${imageAssetPath}mountain3-top.png`),
     },
   ],
 
   forest: [
     {
       yOffset: 15,
-      data: await loadImage("../../images/trees1.png"),
+      data: await loadImage(`${imageAssetPath}trees1.png`),
     },
     {
       yOffset: 15,
-      data: await loadImage("../../images/trees2.png"),
+      data: await loadImage(`${imageAssetPath}trees2.png`),
     },
     {
       yOffset: 15,
-      data: await loadImage("../../images/trees3.png"),
+      data: await loadImage(`${imageAssetPath}trees3.png`),
     },
     {
       yOffset: 15,
-      data: await loadImage("../../images/trees4.png"),
+      data: await loadImage(`${imageAssetPath}trees4.png`),
     },
   ],
 
   forestTop: [
     {
       yOffset: 15,
-      data: await loadImage("../../images/trees1-top.png"),
+      data: await loadImage(`${imageAssetPath}trees1-top.png`),
     },
     {
       yOffset: 15,
-      data: await loadImage("../../images/trees2-top.png"),
+      data: await loadImage(`${imageAssetPath}trees2-top.png`),
     },
     {
       yOffset: 15,
-      data: await loadImage("../../images/trees3-top.png"),
+      data: await loadImage(`${imageAssetPath}trees3-top.png`),
     },
     {
       yOffset: 15,
-      data: await loadImage("../../images/trees4-top.png"),
+      data: await loadImage(`${imageAssetPath}trees4-top.png`),
     },
   ],
 
   playerTokens: {
     angel: {
       yOffset: 51,
-      data: await loadImage("../../images/pt-angel.png"),
+      data: await loadImage(`${imageAssetPath}pt-angel.png`),
     },
     despoiler: {
       yOffset: 51,
-      data: await loadImage("../../images/pt-despoiler.png"),
+      data: await loadImage(`${imageAssetPath}pt-despoiler.png`),
     },
     sheild: {
       yOffset: 48,
-      data: await loadImage("../../images/pt-sheild.png"),
+      data: await loadImage(`${imageAssetPath}pt-sheild.png`),
     },
   },
 };
