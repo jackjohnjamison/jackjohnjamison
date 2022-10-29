@@ -117,15 +117,32 @@ playMode.set = () => {
       y: startY - dragY + hHeight,
     };
 
-    console.log(translate.x);
-
     ctx.rect(startX, startY, -dragX, -dragY);
     ctx.stroke();
 
-    highlightTile(positionToTileIndex(tl), "red");
+    const tl_index = positionToTileIndex(tl);
+    const tr_index = positionToTileIndex(tr);
+    const bl_index = positionToTileIndex(bl);
+
+    highlightTile(tl_index, "red");
     highlightTile(positionToTileIndex(bl), "green");
-    highlightTile(positionToTileIndex(tr), "blue");
+    highlightTile(tr_index, "blue");
     highlightTile(positionToTileIndex(br), "yellow");
+
+    const indexDiffX = tr_index.x - tl_index.x + 1;
+    const indexDiffY = bl_index.y - tl_index.y + 1;
+
+    for (let i = 0; i < indexDiffX; i++) {
+      for (let j = 0; j < indexDiffY; j++) {
+        highlightTile(
+          {
+            x: tl_index.x + i - j,
+            y: tl_index.y + i + j,
+          },
+          "yellow"
+        );
+      }
+    }
 
     /////////////////////////////////////////////////////////////////////////////
   };
