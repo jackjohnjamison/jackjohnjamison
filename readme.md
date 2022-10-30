@@ -56,3 +56,6 @@ https://jsbench.me/
 *** Known bugs and issues ***
 - Add a favicon already
 - Black screen of doom! (maybe fixed)
+
+*** Stack OF ***
+https://stackoverflow.com/questions/7016981/efficiently-getting-isometric-grid-positions-within-a-bounding-box
