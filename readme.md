@@ -18,6 +18,7 @@ https://jackjohnjamison.github.io/tiles/
 - Should the entity map use arrays and not objects at tile level?
 - Stop redrawing when objects are not in motion or the camera is not being panned
 - Undo button
+- Make image asset loading async
 - Create entity interface
 - Actually design a game
 - Learn markdown

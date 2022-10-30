@@ -1,11 +1,14 @@
 // Scene constants
 export const //
   // Tile dimensions
-  tileWidth = 64, // pixels
-  tileHeight = 32, // pixels
+  tileWidth = 64,
+  tileHeight = 32,
+  tileHalfWidth = tileWidth / 2,
+  tileHalfHeight = tileHeight / 2,
+  tileDimensionRatio = tileHeight / tileWidth,
   mapSize = 32,
   //
-  // Thickness of padding at canvas bottomd
+  // Thickness of padding at canvas bottom
   paddingBottom = 32,
   paddingTop = 128,
   //
@@ -23,8 +26,5 @@ export const //
   npcPatrolSpeed = 0.08,
   //
   //
-  centerOffsetX = tileWidth / 2,
-  centerOffsetY = tileHeight / 2,
-  tileRatio = tileHeight / tileWidth,
   radians360 = 6.28319,
   baseMarkerSize = 20;

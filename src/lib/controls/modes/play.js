@@ -12,7 +12,10 @@ import {
   baseMarkerSize,
   hoveredTileOutlineColor,
   tileWidth,
-  tileHeight /* */,
+  tileHeight,
+  tileHalfWidth,
+  tileHalfHeight,
+  tileDimensionRatio,
 } from "../../constants";
 
 const playMode = {};
@@ -23,7 +26,7 @@ playMode.set = () => {
 
   mouse.onMouseMove = () => {
     // if (mouse.buttonCode === 1) {
-    //   panCameraTo(-dragX, -dragY);
+    //   panCameraTo(-areaWidth, -areaHeight);
     // }
   };
 
@@ -91,54 +94,45 @@ playMode.set = () => {
 
     const { translate } = scene.view;
 
-    const startX = mouse.dragStart.x;
-    const startY = mouse.dragStart.y;
+    const originX = mouse.dragStart.x;
+    const originY = mouse.dragStart.y;
 
-    const dragX = mouse.drag.x + translate.x;
-    const dragY = mouse.drag.y + translate.y;
+    const areaWidth = -mouse.drag.x - translate.x;
+    const areaHeight = -mouse.drag.y - translate.y;
 
-    const tl = {
-      x: startX,
-      y: startY,
-    };
-    const bl = {
-      x: startX,
-      y: startY - dragY,
-    };
-    const tr = {
-      x: startX - dragX,
-      y: startY,
-    };
+    console.log(areaWidth, areaHeight);
 
-    ctx.rect(startX, startY, -dragX, -dragY);
+    ctx.rect(originX, originY, areaWidth, areaHeight);
     ctx.stroke();
 
-    const tl_index = positionToTileIndex(tl);
-    const tr_index = positionToTileIndex(tr);
-    const bl_index = positionToTileIndex(bl);
+    // Collumn offset
+    const startTile = positionToTileIndex({ x: originX, y: originY });
+    const startTileOrigin = tileIndexToPosition(startTile);
+    const centerPointX = startTileOrigin.x + tileHalfWidth;
+    const centerPointY = startTileOrigin.y + tileHalfHeight;
 
-    const indexDiffX = tr_index.x - tl_index.x + 1;
-    const indexDiffY = bl_index.y - tl_index.y + 1;
+    const distanceFromCenterX = originX - centerPointX;
+    const distanceFromCenterY = originY - centerPointY;
 
-    for (let i = 0; i < indexDiffX; i++) {
-      for (let j = 0; j < indexDiffY; j++) {
-        const tile = {
-          x: tl_index.x + i - j,
-          y: tl_index.y + i + j,
-        };
+    const distanceToNextTileX =
+      tileWidth -
+      (originX - startTileOrigin.x) -
+      Math.abs(distanceFromCenterY) / tileDimensionRatio;
 
-        highlightTile(tile, "yellow");
-      }
+    const distanceToNextTileY =
+      tileHeight -
+      (originY - startTileOrigin.y) -
+      Math.abs(distanceFromCenterX) * tileDimensionRatio;
 
-      for (let j = 0; j < indexDiffY; j++) {
-        const tile = {
-          x: tl_index.x + i - j,
-          y: tl_index.y + i + 1 + j,
-        };
-
-        highlightTile(tile, "red");
-      }
-    }
+    // for (let i = 0; i < indexDiffX; i++) {
+    //   // for (let j = 0; j < indexDiffY; j++) {
+    //   //   const tile = {
+    //   //     x: tl_index.x + i - j,
+    //   //     y: tl_index.y + i + j,
+    //   //   };
+    //   //   highlightTile(tile, "yellow");
+    //   // }
+    // }
 
     /////////////////////////////////////////////////////////////////////////////
   };

@@ -1,7 +1,7 @@
 import { scene } from "../scene";
 import { tileIndexToPosition } from "../map";
 import { drawEllipse } from ".";
-import { tileHeight, centerOffsetX, centerOffsetY } from "../constants";
+import { tileHeight, tileHalfWidth, tileHalfHeight } from "../constants";
 
 const crumbWidth = 16;
 const pinProportion = 0.86;
@@ -19,8 +19,8 @@ const breadcrumbTrail = (path, color, pin, pinColor) => {
     drawEllipse(position, color, crumbWidth, ctx);
 
     if (pin && i === pathLength - 1) {
-      const centerX = position.x + centerOffsetX;
-      const centerY = position.y + centerOffsetY;
+      const centerX = position.x + tileHalfWidth;
+      const centerY = position.y + tileHalfHeight;
 
       ctx.beginPath();
       ctx.moveTo(centerX, centerY);
