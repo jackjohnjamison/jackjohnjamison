@@ -54,38 +54,38 @@ playMode.set = () => {
     }
   };
 
-  scene.effectsMiddle = () => {
-    if (player.isMoving) {
-      breadcrumbTrail(player.path, "lime");
-    } else if (hoveredTile.tileIndex) {
-      breadcrumbTrail(hoveredTile.path, "lime");
-    }
-  };
+  // scene.effectsMiddle = () => {
+  //   if (player.isMoving) {
+  //     breadcrumbTrail(player.path, "lime");
+  //   } else if (hoveredTile.tileIndex) {
+  //     breadcrumbTrail(hoveredTile.path, "lime");
+  //   }
+  // };
 
   scene.effectsTop = () => {
-    if (player.isMoving) {
-      breadcrumbTrail(player.path, "rgba(50, 205, 50, 0.5)", true, "lime");
+    // if (player.isMoving) {
+    //   breadcrumbTrail(player.path, "rgba(50, 205, 50, 0.5)", true, "lime");
 
-      if (hoveredTile.tileIndex) {
-        if (isWalkable(hoveredTile.tileIndex)) {
-          const position = tileIndexToPosition(hoveredTile.tileIndex);
-          drawEllipse(position, hoveredTileOutlineColor, baseMarkerSize, ctx);
-        } else {
-          highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
-        }
-      }
-    } else if (hoveredTile.tileIndex) {
-      breadcrumbTrail(hoveredTile.path, "rgba(50, 205, 50, 0.5)");
+    //   if (hoveredTile.tileIndex) {
+    //     if (isWalkable(hoveredTile.tileIndex)) {
+    //       const position = tileIndexToPosition(hoveredTile.tileIndex);
+    //       drawEllipse(position, hoveredTileOutlineColor, baseMarkerSize, ctx);
+    //     } else {
+    //       highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
+    //     }
+    //   }
+    // } else if (hoveredTile.tileIndex) {
+    //   breadcrumbTrail(hoveredTile.path, "rgba(50, 205, 50, 0.5)");
 
-      if (hoveredTile.tileIndex) {
-        if (isWalkable(hoveredTile.tileIndex)) {
-          const position = tileIndexToPosition(hoveredTile.tileIndex);
-          drawEllipse(position, "lime", baseMarkerSize, ctx);
-        } else {
-          highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
-        }
-      }
-    }
+    //   if (hoveredTile.tileIndex) {
+    //     if (isWalkable(hoveredTile.tileIndex)) {
+    //       const position = tileIndexToPosition(hoveredTile.tileIndex);
+    //       drawEllipse(position, "lime", baseMarkerSize, ctx);
+    //     } else {
+    //       highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
+    //     }
+    //   }
+    // }
 
     ////////////////////////////////////////////////////////////////////
 
@@ -163,14 +163,28 @@ playMode.set = () => {
       (areaHeight - distanceToNextOffsetTileY) / tileHeight
     );
 
+    const bellowCenter = distanceFromCenterY > 0;
+
+    let offsets = {};
+
+    if (bellowCenter) {
+      offsets = {
+        x: 0,
+        y: 1,
+      };
+    } else {
+      offsets = {
+        x: 1,
+        y: 0,
+      };
+    }
+
     for (let x = 0; x < xOffsetTileCount; x++) {
-      for (let y = 0; y < yOffsetTileCount; y++) {
-        const tile = {
-          x: startTile.x + x + 1 - y,
-          y: startTile.y + x + y,
-        };
-        highlightTile(tile, "orange");
-      }
+      const tile = {
+        x: startTile.x + x + offsets.x,
+        y: startTile.y + x + offsets.y,
+      };
+      highlightTile(tile, "orange");
     }
 
     /////////////////////////////////////////////////////////////////////////////

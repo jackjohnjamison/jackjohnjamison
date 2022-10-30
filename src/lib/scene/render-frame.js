@@ -17,9 +17,9 @@ const renderFrame = (delta) => {
 
   effectsMiddle();
 
-  scene.entities.forEach((entity) => {
-    entity.update(delta);
-  });
+  // scene.entities.forEach((entity) => {
+  //   entity.update(delta);
+  // });
 
   ctx.drawImage(entityCanvas, 0, 0);
 
