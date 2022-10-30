@@ -117,8 +117,8 @@ playMode.set = () => {
     const tr_index = positionToTileIndex(tr);
     const bl_index = positionToTileIndex(bl);
 
-    const indexDiffX = tr_index.x - tl_index.x;
-    const indexDiffY = bl_index.y - tl_index.y;
+    const indexDiffX = tr_index.x - tl_index.x + 1;
+    const indexDiffY = bl_index.y - tl_index.y + 1;
 
     for (let i = 0; i < indexDiffX; i++) {
       for (let j = 0; j < indexDiffY; j++) {
