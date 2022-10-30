@@ -43,18 +43,6 @@ const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
     }
   }
 
-  //////////////////////////////////////////
-
-  const distanceToFirstInnerTile =
-    tileRelativeX * tileDimensionRatio +
-    tileRelativeY +
-    areaWidth * tileDimensionRatio +
-    areaHeight;
-
-  console.log(distanceToFirstInnerTile);
-
-  //////////////////////////////////////////
-
   // Outlier rows
   const distanceToFirstOffsetTileX =
     tileWidth - tileRelativeX - edgeToBoundingBoxX;
@@ -69,6 +57,35 @@ const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
   const yOffsetTileCount = Math.ceil(
     (areaHeight - distanceToFirstOffsetTileY) / tileHeight
   );
+
+  //////////////////////////////////////////
+
+  const distanceToFirstInnerTile =
+    tileRelativeX * tileDimensionRatio +
+    tileRelativeY +
+    areaWidth * tileDimensionRatio +
+    areaHeight -
+    (tileWidth + tileHeight) * tileDimensionRatio;
+
+  if (distanceToFirstInnerTile > 0) {
+    // const xTileInnerCount = Math.ceil(
+    //   (areaWidth - distanceToFirstOffsetTileX) / tileWidth + 1
+    // );
+    // const yTileInnerCount = Math.ceil(
+    //   (areaHeight - distanceToFirstOffsetTileY) / tileHeight + 1
+    // );
+    // for (let x = 0; x < xTileInnerCount; x++) {
+    //   for (let y = 0; y < yTileInnerCount; y++) {
+    //     const tile = {
+    //       x: startTile.x + x - 1 - y,
+    //       y: startTile.y + x + y,
+    //     };
+    //     highlightTile(tile, "red");
+    //   }
+    // }
+  }
+
+  //////////////////////////////////////////
 
   // Top row tiles
 
