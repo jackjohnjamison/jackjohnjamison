@@ -100,8 +100,6 @@ playMode.set = () => {
     const areaWidth = -mouse.drag.x - translate.x;
     const areaHeight = -mouse.drag.y - translate.y;
 
-    console.log(areaWidth, areaHeight);
-
     ctx.rect(originX, originY, areaWidth, areaHeight);
     ctx.stroke();
 
@@ -114,25 +112,48 @@ playMode.set = () => {
     const distanceFromCenterX = originX - centerPointX;
     const distanceFromCenterY = originY - centerPointY;
 
-    const distanceToNextTileX =
+    ////////////////////////////////////////
+
+    // Distance to next offset tile
+    const distanceToNextOffsetTileX =
       tileWidth -
       (originX - startTileOrigin.x) -
       Math.abs(distanceFromCenterY) / tileDimensionRatio;
 
-    const distanceToNextTileY =
+    const distanceToNextOffsetTileY =
       tileHeight -
       (originY - startTileOrigin.y) -
       Math.abs(distanceFromCenterX) * tileDimensionRatio;
 
-    // for (let i = 0; i < indexDiffX; i++) {
-    //   // for (let j = 0; j < indexDiffY; j++) {
-    //   //   const tile = {
-    //   //     x: tl_index.x + i - j,
-    //   //     y: tl_index.y + i + j,
-    //   //   };
-    //   //   highlightTile(tile, "yellow");
-    //   // }
-    // }
+    ////////////////////////////////////////
+
+    const distanceToNextTileX =
+      tileWidth -
+      (originX - startTileOrigin.x) +
+      Math.abs(distanceFromCenterY) / tileDimensionRatio;
+
+    const distanceToNextTileY =
+      tileHeight -
+      (originY - startTileOrigin.y) +
+      Math.abs(distanceFromCenterX) * tileDimensionRatio;
+
+    const xTileCount = Math.ceil(
+      (areaWidth - distanceToNextTileX) / tileWidth + 1
+    );
+
+    const yTileCount = Math.ceil(
+      (areaHeight - distanceToNextTileY) / tileHeight + 1
+    );
+
+    for (let x = 0; x < xTileCount; x++) {
+      for (let y = 0; y < yTileCount; y++) {
+        const tile = {
+          x: startTile.x + x - y,
+          y: startTile.y + x + y,
+        };
+        highlightTile(tile, "yellow");
+      }
+    }
 
     /////////////////////////////////////////////////////////////////////////////
   };
