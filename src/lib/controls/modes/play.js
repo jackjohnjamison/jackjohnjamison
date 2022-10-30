@@ -155,6 +155,24 @@ playMode.set = () => {
       }
     }
 
+    const xOffsetTileCount = Math.ceil(
+      (areaWidth - distanceToNextOffsetTileX) / tileWidth
+    );
+
+    const yOffsetTileCount = Math.ceil(
+      (areaHeight - distanceToNextOffsetTileY) / tileHeight
+    );
+
+    for (let x = 0; x < xOffsetTileCount; x++) {
+      for (let y = 0; y < yOffsetTileCount; y++) {
+        const tile = {
+          x: startTile.x + x + 1 - y,
+          y: startTile.y + x + y,
+        };
+        highlightTile(tile, "orange");
+      }
+    }
+
     /////////////////////////////////////////////////////////////////////////////
   };
 };
