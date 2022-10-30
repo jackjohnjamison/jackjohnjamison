@@ -46,11 +46,11 @@ const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
   //////////////////////////////////////////
 
   const distanceToFirstInnerTile =
-    tileWidth +
-    tileHeight -
-    (tileRelativeX + tileRelativeY) -
-    (areaWidth + areaHeight) -
-    (edgeToBoundingBoxX + edgeToBoundingBoxY);
+    tileRelativeX * tileDimensionRatio +
+    tileRelativeY +
+    areaWidth * tileDimensionRatio +
+    areaHeight;
+
   console.log(distanceToFirstInnerTile);
 
   //////////////////////////////////////////
