@@ -1,14 +1,14 @@
 import { isWalkable, setWalkable } from "./is-walkable";
 import { paintTile, unsetTileLock } from "./paint-tile";
 import { drawLineTile } from "./draw-line-tile";
+import { tileTypes } from "./tile-types";
+import { rectangularTileSelection } from "./rectangular-tile-selection";
 import {
   createTileMapFromParams,
   loadMapFromImport,
   saveTileMaptoJSON,
   loadTileMapFromJSON,
 } from "./tile-map";
-import { tileTypes } from "./tile-types";
-
 import {
   drawImageTile,
   renderGrid,
@@ -19,6 +19,7 @@ import {
 } from "./map-utilities";
 
 export {
+  rectangularTileSelection,
   drawImageTile,
   renderGrid,
   findHoveredTile,
