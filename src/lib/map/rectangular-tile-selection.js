@@ -13,28 +13,24 @@ const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
   const centerPointX = startTileOrigin.x + tileHalfWidth;
   const centerPointY = startTileOrigin.y + tileHalfHeight;
 
-  const originDistanceX = originX - startTileOrigin.x;
-  const originDistanceY = originY - startTileOrigin.y;
+  const tileRelativeX = originX - startTileOrigin.x;
+  const tileRelativeY = originY - startTileOrigin.y;
 
   const distanceFromCenterX = originX - centerPointX;
   const distanceFromCenterY = originY - centerPointY;
 
-  const distanceToNextTileX =
-    tileWidth -
-    originDistanceX +
-    Math.abs(distanceFromCenterY) / tileDimensionRatio;
+  const edgeToBoundingBoxX = Math.abs(distanceFromCenterY) / tileDimensionRatio;
+  const edgeToBoundingBoxY = Math.abs(distanceFromCenterX) * tileDimensionRatio;
 
-  const distanceToNextTileY =
-    tileHeight -
-    originDistanceY +
-    Math.abs(distanceFromCenterX) * tileDimensionRatio;
+  const distanceToFirstTileX = tileWidth - tileRelativeX + edgeToBoundingBoxX;
+  const distanceToFirstTileY = tileHeight - tileRelativeY + edgeToBoundingBoxY;
 
   const xTileCount = Math.ceil(
-    (areaWidth - distanceToNextTileX) / tileWidth + 1
+    (areaWidth - distanceToFirstTileX) / tileWidth + 1
   );
 
   const yTileCount = Math.ceil(
-    (areaHeight - distanceToNextTileY) / tileHeight + 1
+    (areaHeight - distanceToFirstTileY) / tileHeight + 1
   );
 
   for (let x = 0; x < xTileCount; x++) {
@@ -47,25 +43,31 @@ const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
     }
   }
 
-  // Offset tiles
+  //////////////////////////////////////////
+
+  const distanceToFirstInnerTile =
+    tileWidth +
+    tileHeight -
+    (tileRelativeX + tileRelativeY) -
+    (areaWidth + areaHeight) -
+    (edgeToBoundingBoxX + edgeToBoundingBoxY);
+  console.log(distanceToFirstInnerTile);
+
+  //////////////////////////////////////////
 
   // Outlier rows
-  const distanceToNextOffsetTileX =
-    tileWidth -
-    originDistanceX -
-    Math.abs(distanceFromCenterY) / tileDimensionRatio;
+  const distanceToFirstOffsetTileX =
+    tileWidth - tileRelativeX - edgeToBoundingBoxX;
 
-  const distanceToNextOffsetTileY =
-    tileHeight -
-    originDistanceY -
-    Math.abs(distanceFromCenterX) * tileDimensionRatio;
+  const distanceToFirstOffsetTileY =
+    tileHeight - tileRelativeY - edgeToBoundingBoxY;
 
   const xOffsetTileCount = Math.ceil(
-    (areaWidth - distanceToNextOffsetTileX) / tileWidth
+    (areaWidth - distanceToFirstOffsetTileX) / tileWidth
   );
 
   const yOffsetTileCount = Math.ceil(
-    (areaHeight - distanceToNextOffsetTileY) / tileHeight
+    (areaHeight - distanceToFirstOffsetTileY) / tileHeight
   );
 
   // Top row tiles
