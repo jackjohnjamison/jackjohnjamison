@@ -165,15 +165,15 @@ playMode.set = () => {
 
     const bellowCenter = distanceFromCenterY > 0;
 
-    let offsets = {};
+    let offsetsX = {};
 
     if (bellowCenter) {
-      offsets = {
+      offsetsX = {
         x: 0,
         y: 1,
       };
     } else {
-      offsets = {
+      offsetsX = {
         x: 1,
         y: 0,
       };
@@ -181,10 +181,36 @@ playMode.set = () => {
 
     for (let x = 0; x < xOffsetTileCount; x++) {
       const tile = {
-        x: startTile.x + x + offsets.x,
-        y: startTile.y + x + offsets.y,
+        x: startTile.x + x + offsetsX.x,
+        y: startTile.y + x + offsetsX.y,
       };
       highlightTile(tile, "orange");
+    }
+
+    ////
+
+    const leftOfCenter = distanceFromCenterX < 0;
+
+    let offsetsY = {};
+
+    if (leftOfCenter) {
+      offsetsY = {
+        x: -1,
+        y: 0,
+      };
+    } else {
+      offsetsY = {
+        x: 0,
+        y: 1,
+      };
+    }
+
+    for (let y = 0; y < yOffsetTileCount; y++) {
+      const tile = {
+        x: startTile.x - y + offsetsY.x,
+        y: startTile.y + y + offsetsY.y,
+      };
+      highlightTile(tile, "purple");
     }
 
     /////////////////////////////////////////////////////////////////////////////
