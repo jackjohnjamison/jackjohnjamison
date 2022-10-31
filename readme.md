@@ -59,3 +59,4 @@ https://jsbench.me/
 
 *** Stack OF ***
 https://stackoverflow.com/questions/7016981/efficiently-getting-isometric-grid-positions-within-a-bounding-box
+https://stackoverflow.com/questions/3952142/js-how-to-algorithmically-highlight-a-diamond-shaped-selection-of-x-y-coordinat
