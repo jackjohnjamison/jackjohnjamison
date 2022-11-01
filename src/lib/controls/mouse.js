@@ -1,4 +1,5 @@
 import { scene } from "../scene";
+import { tileHalfHeight, tileHalfWidth } from "../constants";
 
 const mouse = {
   x: 0,
@@ -25,7 +26,20 @@ const mouseTracker = (element) => {
 
     if (mouse.buttonCode === 1) {
       mouse.isDragged = true;
-      mouse.drag.x = mouse.dragStart.x - mouse.x - translate.x;
+
+      const mouseDragX = mouse.dragStart.x - mouse.x - translate.x;
+      const mouseDragY = mouse.dragStart.y - mouse.y - translate.y;
+
+      // This limits drag speed to half the dimension of a tile on that axis
+      mouse.drag.x = Math.max(
+        mouse.drag.x - tileHalfWidth,
+        Math.min(mouseDragX, mouse.drag.x + tileHalfWidth)
+      );
+      mouse.drag.y = Math.max(
+        mouse.drag.y - tileHalfWidth,
+        Math.min(mouseDragY, mouse.drag.y + tileHalfHeight)
+      );
+
       mouse.drag.y = mouse.dragStart.y - mouse.y - translate.y;
     }
 
@@ -40,8 +54,6 @@ const mouseTracker = (element) => {
 
     mouse.dragStart.x = mouse.x;
     mouse.dragStart.y = mouse.y;
-    mouse.drag.x = 0;
-    mouse.drag.y = 0;
   };
 
   document.onmouseup = () => {

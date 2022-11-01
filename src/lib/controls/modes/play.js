@@ -26,9 +26,9 @@ playMode.set = () => {
   const { hoveredTile, mouse, player, ctx, view } = scene;
 
   mouse.onMouseMove = () => {
-    // if (mouse.buttonCode === 1) {
-    //   panCameraTo(-areaWidth, -areaHeight);
-    // }
+    if (mouse.buttonCode === 1) {
+      panCameraTo(-mouse.drag.x, -mouse.drag.y);
+    }
   };
 
   mouse.onMouseUp = () => {
@@ -66,7 +66,6 @@ playMode.set = () => {
   scene.effectsTop = () => {
     // if (player.isMoving) {
     //   breadcrumbTrail(player.path, "rgba(50, 205, 50, 0.5)", true, "lime");
-
     //   if (hoveredTile.tileIndex) {
     //     if (isWalkable(hoveredTile.tileIndex)) {
     //       const position = tileIndexToPosition(hoveredTile.tileIndex);
@@ -77,7 +76,6 @@ playMode.set = () => {
     //   }
     // } else if (hoveredTile.tileIndex) {
     //   breadcrumbTrail(hoveredTile.path, "rgba(50, 205, 50, 0.5)");
-
     //   if (hoveredTile.tileIndex) {
     //     if (isWalkable(hoveredTile.tileIndex)) {
     //       const position = tileIndexToPosition(hoveredTile.tileIndex);
@@ -87,24 +85,17 @@ playMode.set = () => {
     //     }
     //   }
     // }
-
     ////////////////////////////////////////////////////////////////////
-
-    ctx.strokeStyle = "aqua";
-    ctx.beginPath();
-
-    const { translate } = scene.view;
-
-    const originX = mouse.dragStart.x;
-    const originY = mouse.dragStart.y;
-
-    const areaWidth = -mouse.drag.x - translate.x;
-    const areaHeight = -mouse.drag.y - translate.y;
-
-    ctx.rect(originX, originY, areaWidth, areaHeight);
-    ctx.stroke();
-
-    rectangularTileSelection(originX, originY, areaWidth, areaHeight);
+    // ctx.strokeStyle = "aqua";
+    // ctx.beginPath();
+    // const { translate } = scene.view;
+    // const originX = mouse.dragStart.x;
+    // const originY = mouse.dragStart.y;
+    // const areaWidth = -mouse.drag.x - translate.x;
+    // const areaHeight = -mouse.drag.y - translate.y;
+    // ctx.rect(originX, originY, areaWidth, areaHeight);
+    // ctx.stroke();
+    // rectangularTileSelection(originX, originY, areaWidth, areaHeight);
   };
 };
 
