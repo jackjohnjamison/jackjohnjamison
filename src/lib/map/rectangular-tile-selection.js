@@ -7,7 +7,7 @@ import {
   tileDimensionRatio,
 } from "../constants";
 
-const findTopRow = (originX, originY, areaWidth) => {
+const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
   const startTile = positionToTileIndex({ x: originX, y: originY });
   const startTileOrigin = tileIndexToPosition(startTile);
   const centerPointY = startTileOrigin.y + tileHalfHeight;
@@ -38,10 +38,10 @@ const findTopRow = (originX, originY, areaWidth) => {
       y: 0,
     };
 
-    for (let x = 0; x < xTileCount; x++) {
+    for (let i = 0; i < xTileCount; i++) {
       const tile = {
-        x: startTile.x + x + offsetsX.x + rowOffset.x,
-        y: startTile.y + x + offsetsX.y + rowOffset.y,
+        x: startTile.x + i + offsetsX.x + rowOffset.x,
+        y: startTile.y + i + offsetsX.y + rowOffset.y,
       };
       highlightTile(tile, "yellow");
     }
@@ -56,10 +56,10 @@ const findTopRow = (originX, originY, areaWidth) => {
       y: 0,
     };
 
-    for (let x = 0; x < xTileCount; x++) {
+    for (let i = 0; i < xTileCount; i++) {
       const tile = {
-        x: startTile.x + x + offsetsX.x + rowOffset.x,
-        y: startTile.y + x + offsetsX.y + rowOffset.y,
+        x: startTile.x + i + offsetsX.x + rowOffset.x,
+        y: startTile.y + i + offsetsX.y + rowOffset.y,
       };
       highlightTile(tile, "orange");
     }
@@ -70,7 +70,9 @@ const findTopRow = (originX, originY, areaWidth) => {
 
   let offsetTurn = aboveCenter;
 
-  for (let i = 0; i < 10; i++) {
+  const tileCountY = areaHeight / tileHalfHeight + 1;
+
+  for (let i = 0; i < tileCountY; i++) {
     if (offsetTurn) {
       offsetRow();
     } else {
@@ -78,52 +80,6 @@ const findTopRow = (originX, originY, areaWidth) => {
     }
     offsetTurn = !offsetTurn;
   }
-
-  // if (aboveCenter) {
-  //   distanceToNextTile = distanceToFirstOffsetTile;
-  //   xTileCount = Math.ceil((areaWidth - distanceToNextTile) / tileWidth);
-
-  //   offsetsX = {
-  //     x: 1,
-  //     y: 0,
-  //   };
-  // } else {
-  //   distanceToNextTile = distanceToFirstTile;
-  //   xTileCount = Math.ceil((areaWidth - distanceToNextTile) / tileWidth + 1);
-
-  //   offsetsX = {
-  //     x: 0,
-  //     y: 0,
-  //   };
-  // }
-
-  // for (let x = 0; x < xTileCount; x++) {
-  //   const tile = {
-  //     x: startTile.x + x + offsetsX.x,
-  //     y: startTile.y + x + offsetsX.y,
-  //   };
-  //   highlightTile(tile, "yellow");
-  // }
-
-  // ////////////////////////////////////////////////////////
-
-  // const distanceToFirstTileBX = tileWidth - tileRelativeX + edgeToBoundingBoxX;
-
-  // const xTileCountB = Math.ceil(
-  //   (areaWidth - distanceToFirstTileBX) / tileWidth + 1
-  // );
-
-  // for (let x = 0; x < xTileCountB; x++) {
-  //   const tile = {
-  //     x: startTile.x + x,
-  //     y: startTile.y + x,
-  //   };
-  //   highlightTile(tile, "orange");
-  // }
-};
-
-const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
-  findTopRow(originX, originY, areaWidth);
 };
 
 export { rectangularTileSelection };
