@@ -1,3 +1,4 @@
+import { scene } from "../scene";
 import { positionToTileIndex, tileIndexToPosition, highlightTile } from ".";
 import {
   tileWidth,
@@ -7,15 +8,11 @@ import {
   tileDimensionRatio,
 } from "../constants";
 
-const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
-  const startTile = positionToTileIndex({ x: originX, y: originY });
-  const bottomPaddingTileCount = 5;
-  const rowTileCount = Math.ceil(areaWidth / tileWidth);
-  const columnTileCount =
-    Math.ceil(areaHeight / tileHalfHeight) + bottomPaddingTileCount;
+const tileOverCount = 5;
 
-  for (let i = -1; i < rowTileCount; i++) {
-    for (let j = 0; j < columnTileCount; j++) {
+const loopTiles = (startTile, rows, columns) => {
+  for (let j = 0; j < columns; j++) {
+    for (let i = -1; i < rows; i++) {
       const xOffset = -Math.floor(j / 2) + 1;
       const yOffset = Math.ceil(j / 2);
 
@@ -23,30 +20,25 @@ const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
         x: startTile.x + i + xOffset,
         y: startTile.y + i + yOffset,
       };
+
       highlightTile(tile, "orange");
     }
   }
 };
 
-const horizontalTileSelection = (originX, originY, areaWidth, areaHeight) => {
+const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
   const startTile = positionToTileIndex({ x: originX, y: originY });
-  const bottomPaddingTileCount = 5;
-  const rowTileCount = Math.ceil(areaWidth / tileWidth);
-  const columnTileCount =
-    Math.ceil(areaHeight / tileHalfHeight) + bottomPaddingTileCount;
+  const rows = Math.ceil((areaWidth + tileHalfWidth) / tileWidth);
+  const columns = Math.ceil(areaHeight / tileHalfHeight) + tileOverCount;
 
-  for (let i = -1; i < rowTileCount; i++) {
-    for (let j = 0; j < columnTileCount; j++) {
-      const xOffset = -Math.floor(j / 2) + 1;
-      const yOffset = Math.ceil(j / 2);
+  loopTiles(startTile, rows, columns);
+};
 
-      const tile = {
-        x: startTile.x + i + xOffset,
-        y: startTile.y + i + yOffset,
-      };
-      highlightTile(tile, "orange");
-    }
-  }
+const horizontalTileSelection = (originX, originY, areaWidth) => {
+  const startTile = positionToTileIndex({ x: originX, y: originY });
+  const rows = Math.ceil((areaWidth + tileHalfWidth) / tileWidth);
+
+  loopTiles(startTile, rows, tileOverCount);
 };
 
 export { rectangularTileSelection, horizontalTileSelection };

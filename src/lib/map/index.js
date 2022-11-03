@@ -2,7 +2,10 @@ import { isWalkable, setWalkable } from "./is-walkable";
 import { paintTile, unsetTileLock } from "./paint-tile";
 import { drawLineTile } from "./draw-line-tile";
 import { tileTypes } from "./tile-types";
-import { rectangularTileSelection } from "./rectangular-tile-selection";
+import {
+  rectangularTileSelection,
+  horizontalTileSelection,
+} from "./rectangular-tile-selection";
 import {
   createTileMapFromParams,
   loadMapFromImport,
@@ -20,6 +23,7 @@ import {
 
 export {
   rectangularTileSelection,
+  horizontalTileSelection,
   drawImageTile,
   renderGrid,
   findHoveredTile,

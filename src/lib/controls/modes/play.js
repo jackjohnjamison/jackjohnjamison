@@ -7,6 +7,7 @@ import {
   isWalkable,
   highlightTile,
   rectangularTileSelection,
+  horizontalTileSelection,
 } from "../../map";
 import { breadcrumbTrail, drawEllipse } from "../../effects";
 import {
@@ -95,6 +96,7 @@ playMode.set = () => {
     const areaHeight = -mouse.drag.y - translate.y;
     ctx.rect(originX, originY, areaWidth, areaHeight);
     ctx.stroke();
+    // horizontalTileSelection(originX, originY, areaWidth);
     rectangularTileSelection(originX, originY, areaWidth, areaHeight);
   };
 };
