@@ -1,12 +1,6 @@
 import { scene } from "../scene";
-import { positionToTileIndex, tileIndexToPosition, highlightTile } from ".";
-import {
-  tileWidth,
-  tileHeight,
-  tileHalfWidth,
-  tileHalfHeight,
-  tileDimensionRatio,
-} from "../constants";
+import { positionToTileIndex, highlightTile } from ".";
+import { tileWidth, tileHalfWidth, tileHalfHeight } from "../constants";
 
 const tileOverCount = 5;
 
@@ -57,7 +51,10 @@ const horizontalTileSelection = (originX, originY, areaWidth) => {
 };
 
 const verticalTileSelection = (originX, originY, areaHeight) => {
-  const startTile = positionToTileIndex({ x: originX, y: originY });
+  const startTile = positionToTileIndex({
+    x: originX - tileHalfWidth,
+    y: originY,
+  });
   const rows = Math.ceil((areaHeight + tileHalfHeight) / tileHalfHeight) + 1;
   const columns = 1;
 
