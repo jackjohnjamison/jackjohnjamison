@@ -11,16 +11,20 @@ import {
 const tileOverCount = 5;
 
 const loopTiles = (startTile, columns, rows) => {
+  const { xTiles } = scene.tileMap;
+
   for (let j = 0; j < rows; j++) {
     const xOffset = -Math.floor(j / 2) + 1;
     const yOffset = Math.ceil(j / 2);
 
     // console.log(startTile.x, xOffset);s
-    console.log(startTile.y, yOffset);
+    // console.log(startTile.y, yOffset);
 
-    const indexStart = Math.max(-1, -startTile.x - xOffset);
+    const columnStart = Math.max(-1, -startTile.x - xOffset);
 
-    for (let i = indexStart; i < columns; i++) {
+    const columnEnd = Math.min(columns, xTiles - startTile.x - xOffset);
+
+    for (let i = columnStart; i < columnEnd; i++) {
       const tile = {
         x: startTile.x + i + xOffset,
         y: startTile.y + i + yOffset,
