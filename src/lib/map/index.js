@@ -5,7 +5,8 @@ import { tileTypes } from "./tile-types";
 import {
   rectangularTileSelection,
   horizontalTileSelection,
-} from "./rectangular-tile-selection";
+  verticalTileSelection,
+} from "./tile-selection";
 import {
   createTileMapFromParams,
   loadMapFromImport,
@@ -24,6 +25,7 @@ import {
 export {
   rectangularTileSelection,
   horizontalTileSelection,
+  verticalTileSelection,
   drawImageTile,
   renderGrid,
   findHoveredTile,

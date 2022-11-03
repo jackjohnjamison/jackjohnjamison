@@ -11,18 +11,23 @@ import {
 const tileOverCount = 5;
 
 const loopTiles = (startTile, columns, rows) => {
-  const { xTiles } = scene.tileMap;
+  const { xTiles, yTiles } = scene.tileMap;
 
   for (let j = 0; j < rows; j++) {
     const xOffset = -Math.floor(j / 2) + 1;
     const yOffset = Math.ceil(j / 2);
 
-    // console.log(startTile.x, xOffset);s
-    // console.log(startTile.y, yOffset);
+    const columnStart = Math.max(
+      -1,
+      -startTile.x - xOffset,
+      -startTile.y - yOffset
+    );
 
-    const columnStart = Math.max(-1, -startTile.x - xOffset);
-
-    const columnEnd = Math.min(columns, xTiles - startTile.x - xOffset);
+    const columnEnd = Math.min(
+      columns,
+      xTiles - startTile.x - xOffset,
+      yTiles - startTile.y - yOffset
+    );
 
     for (let i = columnStart; i < columnEnd; i++) {
       const tile = {
@@ -38,7 +43,8 @@ const loopTiles = (startTile, columns, rows) => {
 const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
   const startTile = positionToTileIndex({ x: originX, y: originY });
   const columns = Math.ceil((areaWidth + tileHalfWidth) / tileWidth);
-  const rows = Math.ceil(areaHeight / tileHalfHeight) + tileOverCount;
+  const rows =
+    Math.ceil((areaHeight + tileHalfHeight) / tileHalfHeight) + tileOverCount;
 
   loopTiles(startTile, columns, rows);
 };
@@ -47,7 +53,19 @@ const horizontalTileSelection = (originX, originY, areaWidth) => {
   const startTile = positionToTileIndex({ x: originX, y: originY });
   const columns = Math.ceil((areaWidth + tileHalfWidth) / tileWidth);
 
-  loopTiles(startTile, tileOverCount, columns);
+  loopTiles(startTile, columns, tileOverCount);
 };
 
-export { rectangularTileSelection, horizontalTileSelection };
+const verticalTileSelection = (originX, originY, areaHeight) => {
+  const startTile = positionToTileIndex({ x: originX, y: originY });
+  const rows = Math.ceil((areaHeight + tileHalfHeight) / tileHalfHeight) + 1;
+  const columns = 1;
+
+  loopTiles(startTile, columns, rows);
+};
+
+export {
+  rectangularTileSelection,
+  horizontalTileSelection,
+  verticalTileSelection,
+};

@@ -8,6 +8,7 @@ import {
   highlightTile,
   rectangularTileSelection,
   horizontalTileSelection,
+  verticalTileSelection,
 } from "../../map";
 import { breadcrumbTrail, drawEllipse } from "../../effects";
 import {
@@ -97,7 +98,8 @@ playMode.set = () => {
     ctx.rect(originX, originY, areaWidth, areaHeight);
     ctx.stroke();
     // horizontalTileSelection(originX, originY, areaWidth);
-    rectangularTileSelection(originX, originY, areaWidth, areaHeight);
+    // rectangularTileSelection(originX, originY, areaWidth, areaHeight);
+    verticalTileSelection(originX, originY, areaHeight);
   };
 };
 
