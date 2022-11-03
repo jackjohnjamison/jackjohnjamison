@@ -25,7 +25,7 @@ const playMode = {};
 const noop = () => {};
 
 playMode.set = () => {
-  const { hoveredTile, mouse, player, ctx, view } = scene;
+  const { hoveredTile, mouse, player, canvasRoot, topCtx, view } = scene;
 
   mouse.onMouseMove = () => {
     // if (mouse.buttonCode === 1) {
@@ -46,14 +46,14 @@ playMode.set = () => {
 
     if (hoveredTile.tileIndex) {
       if (mouse.isDragged) {
-        scene.canvas.style.cursor = "grabbing";
+        canvasRoot.style.cursor = "grabbing";
       } else {
-        scene.canvas.style.cursor = "pointer";
+        canvasRoot.style.cursor = "pointer";
       }
 
       hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
     } else {
-      scene.canvas.style.cursor = "default";
+      canvasRoot.style.cursor = "default";
     }
   };
 
@@ -88,18 +88,18 @@ playMode.set = () => {
     //   }
     // }
     ////////////////////////////////////////////////////////////////////
-    ctx.strokeStyle = "aqua";
-    ctx.beginPath();
+    topCtx.strokeStyle = "aqua";
+    topCtx.beginPath();
     const { translate } = scene.view;
     const originX = mouse.dragStart.x;
     const originY = mouse.dragStart.y;
     const areaWidth = -mouse.drag.x - translate.x;
     const areaHeight = -mouse.drag.y - translate.y;
-    ctx.rect(originX, originY, areaWidth, areaHeight);
-    ctx.stroke();
+    topCtx.rect(originX, originY, areaWidth, areaHeight);
+    topCtx.stroke();
     // horizontalTileSelection(originX, originY, areaWidth);
     // rectangularTileSelection(originX, originY, areaWidth, areaHeight);
-    verticalTileSelection(originX, originY, areaHeight);
+    // verticalTileSelection(originX, originY, areaHeight);
   };
 };
 

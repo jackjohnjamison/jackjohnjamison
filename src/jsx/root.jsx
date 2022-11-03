@@ -8,6 +8,10 @@ const Root = () => {
     <div class="wrapper">
       <Toolbar />
       <div id="canvasRoot">
+        <canvas id="floorCanvas" />
+        <canvas id="midCanvas" />
+        <canvas id="entityCanvas" />
+        <canvas id="topCanvas" />
         <div id="ui"></div>
         <PauseMenu />
       </div>

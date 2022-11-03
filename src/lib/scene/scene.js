@@ -18,24 +18,26 @@ scene.start = async (map) => {
   const root = document.getElementById("root");
   root.replaceWith(Root());
 
-  // Set canvas and context
-  scene.canvas = document.createElement("canvas");
-  scene.ctx = scene.canvas.getContext("2d");
-  canvasRoot.appendChild(scene.canvas);
-
   scene.monitor = frameRateMonitor();
 
-  // Used for drawing the floor tiles in one piece
-  scene.floorCanvas = new OffscreenCanvas(0, 0);
+  scene.canvasRoot = document.getElementById("floorCanvas");
+
+  scene.floorCanvas = document.getElementById("floorCanvas");
   scene.floorCtx = scene.floorCanvas.getContext("2d");
 
-  scene.entityCanvas = new OffscreenCanvas(0, 0);
+  scene.midCanvas = document.getElementById("midCanvas");
+  scene.midCtx = scene.midCanvas.getContext("2d");
+
+  scene.entityCanvas = document.getElementById("entityCanvas");
   scene.entityCtx = scene.entityCanvas.getContext("2d");
+
+  scene.topCanvas = document.getElementById("topCanvas");
+  scene.topCtx = scene.topCanvas.getContext("2d");
 
   scene.effectsMiddle = () => {};
   scene.effectsTop = () => {};
 
-  scene.mouse = mouseTracker(scene.canvas);
+  scene.mouse = mouseTracker(scene.canvasRoot);
 
   scene.view = setView({
     xTiles: mapSize,

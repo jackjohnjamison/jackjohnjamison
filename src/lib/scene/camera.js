@@ -6,7 +6,8 @@ let velocityX = 0;
 let velocityY = 0;
 
 const panCameraKeys = (delta) => {
-  const { translate } = scene.view;
+  const { view, floorCtx, midCtx, entityCtx, topCtx } = scene;
+  const { translate } = view;
 
   const arrowUp = keyCheck("KeyW");
   const arrowDown = keyCheck("KeyS");
@@ -25,15 +26,24 @@ const panCameraKeys = (delta) => {
   velocityX *= friction;
   velocityY *= friction;
 
-  scene.ctx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+  floorCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+  midCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+  entityCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+  topCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
 };
 
 // TODO auto scroll function for when the player nears the edges of the map
 const panCameraTo = (x, y) => {
-  const { translate } = scene.view;
+  const { view, floorCtx, midCtx, entityCtx, topCtx } = scene;
+  const { translate } = view;
+
   translate.x = Math.round(x);
   translate.y = Math.round(y);
-  scene.ctx.setTransform(1, 0, 0, 1, x, y);
+
+  floorCtx.setTransform(1, 0, 0, 1, x, y);
+  midCtx.setTransform(1, 0, 0, 1, x, y);
+  entityCtx.setTransform(1, 0, 0, 1, x, y);
+  topCtx.setTransform(1, 0, 0, 1, x, y);
 };
 
 export { panCameraKeys, panCameraTo };

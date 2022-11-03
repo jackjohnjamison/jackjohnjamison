@@ -12,8 +12,8 @@ const renderFrame = (delta) => {
   } = scene;
   const { translate } = view;
 
-  ctx.clearRect(-translate.x, -translate.y, canvas.width, canvas.height);
-  ctx.drawImage(floorCanvas, 0, 0);
+  // ctx.clearRect(-translate.x, -translate.y, canvas.width, canvas.height);
+  // ctx.drawImage(floorCanvas, 0, 0);
 
   effectsMiddle();
 
@@ -21,7 +21,7 @@ const renderFrame = (delta) => {
   //   entity.update(delta);
   // });
 
-  ctx.drawImage(entityCanvas, 0, 0);
+  // ctx.drawImage(entityCanvas, 0, 0);
 
   effectsTop();
 };
