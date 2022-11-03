@@ -9,77 +9,44 @@ import {
 
 const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
   const startTile = positionToTileIndex({ x: originX, y: originY });
-  const startTileOrigin = tileIndexToPosition(startTile);
-  const centerPointY = startTileOrigin.y + tileHalfHeight;
-  const tileRelativeX = originX - startTileOrigin.x;
-  const distanceFromCenterY = originY - centerPointY;
-  const edgeToBoundingBoxX = Math.abs(distanceFromCenterY) / tileDimensionRatio;
-  const aboveCenter = distanceFromCenterY < 0;
+  const bottomPaddingTileCount = 5;
+  const rowTileCount = Math.ceil(areaWidth / tileWidth);
+  const columnTileCount =
+    Math.ceil(areaHeight / tileHalfHeight) + bottomPaddingTileCount;
 
-  const distanceToFirstTile = tileWidth - tileRelativeX + edgeToBoundingBoxX;
-  const distanceToFirstOffsetTile =
-    tileWidth - tileRelativeX - edgeToBoundingBoxX;
+  for (let i = -1; i < rowTileCount; i++) {
+    for (let j = 0; j < columnTileCount; j++) {
+      const xOffset = -Math.floor(j / 2) + 1;
+      const yOffset = Math.ceil(j / 2);
 
-  let offsetsX;
-  let xTileCount;
-  let distanceToNextTile;
-
-  const rowOffset = {
-    x: 0,
-    y: 0,
-  };
-
-  const offsetRow = () => {
-    distanceToNextTile = distanceToFirstOffsetTile;
-    xTileCount = Math.ceil((areaWidth - distanceToNextTile) / tileWidth);
-
-    offsetsX = {
-      x: 1,
-      y: 0,
-    };
-
-    for (let i = 0; i < xTileCount; i++) {
       const tile = {
-        x: startTile.x + i + offsetsX.x + rowOffset.x,
-        y: startTile.y + i + offsetsX.y + rowOffset.y,
-      };
-      highlightTile(tile, "yellow");
-    }
-  };
-
-  const inlineRow = () => {
-    distanceToNextTile = distanceToFirstTile;
-    xTileCount = Math.ceil((areaWidth - distanceToNextTile) / tileWidth + 1);
-
-    offsetsX = {
-      x: 0,
-      y: 0,
-    };
-
-    for (let i = 0; i < xTileCount; i++) {
-      const tile = {
-        x: startTile.x + i + offsetsX.x + rowOffset.x,
-        y: startTile.y + i + offsetsX.y + rowOffset.y,
+        x: startTile.x + i + xOffset,
+        y: startTile.y + i + yOffset,
       };
       highlightTile(tile, "orange");
     }
-
-    rowOffset.y++;
-    rowOffset.x--;
-  };
-
-  let offsetTurn = aboveCenter;
-
-  const tileCountY = areaHeight / tileHalfHeight + 1;
-
-  for (let i = 0; i < tileCountY; i++) {
-    if (offsetTurn) {
-      offsetRow();
-    } else {
-      inlineRow();
-    }
-    offsetTurn = !offsetTurn;
   }
 };
 
-export { rectangularTileSelection };
+const horizontalTileSelection = (originX, originY, areaWidth, areaHeight) => {
+  const startTile = positionToTileIndex({ x: originX, y: originY });
+  const bottomPaddingTileCount = 5;
+  const rowTileCount = Math.ceil(areaWidth / tileWidth);
+  const columnTileCount =
+    Math.ceil(areaHeight / tileHalfHeight) + bottomPaddingTileCount;
+
+  for (let i = -1; i < rowTileCount; i++) {
+    for (let j = 0; j < columnTileCount; j++) {
+      const xOffset = -Math.floor(j / 2) + 1;
+      const yOffset = Math.ceil(j / 2);
+
+      const tile = {
+        x: startTile.x + i + xOffset,
+        y: startTile.y + i + yOffset,
+      };
+      highlightTile(tile, "orange");
+    }
+  }
+};
+
+export { rectangularTileSelection, horizontalTileSelection };

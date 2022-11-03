@@ -26,9 +26,9 @@ playMode.set = () => {
   const { hoveredTile, mouse, player, ctx, view } = scene;
 
   mouse.onMouseMove = () => {
-    if (mouse.buttonCode === 1) {
-      panCameraTo(-mouse.drag.x, -mouse.drag.y);
-    }
+    // if (mouse.buttonCode === 1) {
+    //   panCameraTo(-mouse.drag.x, -mouse.drag.y);
+    // }
   };
 
   mouse.onMouseUp = () => {
@@ -86,16 +86,16 @@ playMode.set = () => {
     //   }
     // }
     ////////////////////////////////////////////////////////////////////
-    // ctx.strokeStyle = "aqua";
-    // ctx.beginPath();
-    // const { translate } = scene.view;
-    // const originX = mouse.dragStart.x;
-    // const originY = mouse.dragStart.y;
-    // const areaWidth = -mouse.drag.x - translate.x;
-    // const areaHeight = -mouse.drag.y - translate.y;
-    // ctx.rect(originX, originY, areaWidth, areaHeight);
-    // ctx.stroke();
-    // rectangularTileSelection(originX, originY, areaWidth, areaHeight);
+    ctx.strokeStyle = "aqua";
+    ctx.beginPath();
+    const { translate } = scene.view;
+    const originX = mouse.dragStart.x;
+    const originY = mouse.dragStart.y;
+    const areaWidth = -mouse.drag.x - translate.x;
+    const areaHeight = -mouse.drag.y - translate.y;
+    ctx.rect(originX, originY, areaWidth, areaHeight);
+    ctx.stroke();
+    rectangularTileSelection(originX, originY, areaWidth, areaHeight);
   };
 };
 
