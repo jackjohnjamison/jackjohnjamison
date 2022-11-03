@@ -19,11 +19,13 @@ const spriteSize = {}
 let [ selectedTileSet ] = Object.keys(tileTypes)
 let selectedSetType = tileTypes[selectedTileSet].type
 let selectedTileSetSprites
+console.log(selectedTileSetSprites);
 let tileSets = []
 
 const resetBrushes = (e) => {
   selectedTileSet = e?.target.value || selectedTileSet;
   selectedSetType = tileTypes[selectedTileSet].type
+  selectedTileSetSprites = sprites[selectedTileSet]
   spriteDisplay.replaceWith(SpriteDisplay());
 
   if(selectedSetType !== "void") {
@@ -69,8 +71,6 @@ const findSpriteSize = () => {
 
 const hueRotate = () => {
   const inputs = tilePainter.elements;
-
-  
 
   Object.keys(tileSets).forEach((type) => {
     const tileSet = tileSets[type]
@@ -141,8 +141,6 @@ const SpriteOption = (props) => {
 const SpriteBrushes = () => {
   const { width, height } = spriteSize[ selectedTileSet ] || findSpriteSize()
   const tileSetArray = Object.keys(tileSets)
-
-  selectedTileSetSprites = sprites[selectedTileSet]
 
   return (
     <div>
