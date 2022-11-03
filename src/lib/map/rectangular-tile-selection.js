@@ -10,12 +10,17 @@ import {
 
 const tileOverCount = 5;
 
-const loopTiles = (startTile, rows, columns) => {
-  for (let j = 0; j < columns; j++) {
-    for (let i = -1; i < rows; i++) {
-      const xOffset = -Math.floor(j / 2) + 1;
-      const yOffset = Math.ceil(j / 2);
+const loopTiles = (startTile, columns, rows) => {
+  for (let j = 0; j < rows; j++) {
+    const xOffset = -Math.floor(j / 2) + 1;
+    const yOffset = Math.ceil(j / 2);
 
+    // console.log(startTile.x, xOffset);s
+    console.log(startTile.y, yOffset);
+
+    const indexStart = Math.max(-1, -startTile.x - xOffset);
+
+    for (let i = indexStart; i < columns; i++) {
       const tile = {
         x: startTile.x + i + xOffset,
         y: startTile.y + i + yOffset,
@@ -28,17 +33,17 @@ const loopTiles = (startTile, rows, columns) => {
 
 const rectangularTileSelection = (originX, originY, areaWidth, areaHeight) => {
   const startTile = positionToTileIndex({ x: originX, y: originY });
-  const rows = Math.ceil((areaWidth + tileHalfWidth) / tileWidth);
-  const columns = Math.ceil(areaHeight / tileHalfHeight) + tileOverCount;
+  const columns = Math.ceil((areaWidth + tileHalfWidth) / tileWidth);
+  const rows = Math.ceil(areaHeight / tileHalfHeight) + tileOverCount;
 
-  loopTiles(startTile, rows, columns);
+  loopTiles(startTile, columns, rows);
 };
 
 const horizontalTileSelection = (originX, originY, areaWidth) => {
   const startTile = positionToTileIndex({ x: originX, y: originY });
-  const rows = Math.ceil((areaWidth + tileHalfWidth) / tileWidth);
+  const columns = Math.ceil((areaWidth + tileHalfWidth) / tileWidth);
 
-  loopTiles(startTile, rows, tileOverCount);
+  loopTiles(startTile, tileOverCount, columns);
 };
 
 export { rectangularTileSelection, horizontalTileSelection };
