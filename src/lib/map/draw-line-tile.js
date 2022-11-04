@@ -3,22 +3,22 @@ import { tileIndexToPosition } from ".";
 import { tileWidth, tileHeight } from "../constants";
 
 const drawLineTile = ({ x, y, strokeColor, fillColor }) => {
-  const { ctx } = scene;
+  const { topCtx } = scene;
 
   const position = tileIndexToPosition({ x, y });
-  ctx.strokeStyle = strokeColor;
-  ctx.fillStyle = fillColor;
+  topCtx.strokeStyle = strokeColor;
+  topCtx.fillStyle = fillColor;
 
   // Draw tile outline
-  ctx.beginPath();
-  ctx.moveTo(position.x, position.y + tileHeight / 2);
-  ctx.lineTo(position.x + tileWidth / 2, position.y);
-  ctx.lineTo(position.x + tileWidth, position.y + tileHeight / 2);
-  ctx.lineTo(position.x + tileWidth / 2, position.y + tileHeight);
-  ctx.closePath();
+  topCtx.beginPath();
+  topCtx.moveTo(position.x, position.y + tileHeight / 2);
+  topCtx.lineTo(position.x + tileWidth / 2, position.y);
+  topCtx.lineTo(position.x + tileWidth, position.y + tileHeight / 2);
+  topCtx.lineTo(position.x + tileWidth / 2, position.y + tileHeight);
+  topCtx.closePath();
 
-  ctx.fill();
-  ctx.stroke();
+  topCtx.fill();
+  topCtx.stroke();
 };
 
 export { drawLineTile };

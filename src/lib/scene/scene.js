@@ -20,7 +20,7 @@ scene.start = async (map) => {
 
   scene.monitor = frameRateMonitor();
 
-  scene.canvasRoot = document.getElementById("floorCanvas");
+  scene.canvasRoot = document.getElementById("canvasRoot");
 
   scene.floorCanvas = document.getElementById("floorCanvas");
   scene.floorCtx = scene.floorCanvas.getContext("2d");

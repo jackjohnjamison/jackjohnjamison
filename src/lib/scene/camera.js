@@ -37,10 +37,16 @@ const panCameraTo = (x, y) => {
   const { view, floorCtx, midCtx, entityCtx, topCtx } = scene;
   const { translate } = view;
 
+  console.log(x);
+
   translate.x = Math.round(x);
   translate.y = Math.round(y);
 
   floorCtx.setTransform(1, 0, 0, 1, x, y);
+  floorCtx.globalCompositeOperation = "copy";
+  floorCtx.drawImage(floorCtx.canvas, 0, 0);
+  floorCtx.globalCompositeOperation = "source-over";
+
   midCtx.setTransform(1, 0, 0, 1, x, y);
   entityCtx.setTransform(1, 0, 0, 1, x, y);
   topCtx.setTransform(1, 0, 0, 1, x, y);

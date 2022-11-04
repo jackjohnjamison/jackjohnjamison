@@ -2,7 +2,8 @@ import { scene } from ".";
 
 const renderFrame = (delta) => {
   const {
-    ctx,
+    topCtx,
+    topCanvas,
     canvas,
     floorCanvas,
     entityCanvas,
@@ -14,12 +15,20 @@ const renderFrame = (delta) => {
 
   // ctx.clearRect(-translate.x, -translate.y, canvas.width, canvas.height);
   // ctx.drawImage(floorCanvas, 0, 0);
+  // topCtx.reset();
+  topCtx.clearRect(
+    -translate.x,
+    -translate.y,
+    topCanvas.width,
+    topCanvas.height
+  );
 
   effectsMiddle();
 
-  // scene.entities.forEach((entity) => { // // // DO NOT DELETE
-  //   entity.update(delta);
-  // });
+  scene.entities.forEach((entity) => {
+    // // // DO NOT DELETE
+    entity.update(delta);
+  });
 
   // ctx.drawImage(entityCanvas, 0, 0);
 
@@ -27,12 +36,11 @@ const renderFrame = (delta) => {
 };
 
 const renderStaticFrame = () => {
-  const { ctx, canvas, floorCanvas, entityCanvas, view } = scene;
-  const { translate } = view;
-
-  ctx.clearRect(-translate.x, -translate.y, canvas.width, canvas.height);
-  ctx.drawImage(floorCanvas, 0, 0);
-  ctx.drawImage(entityCanvas, 0, 0);
+  // const { ctx, canvas, floorCanvas, entityCanvas, view } = scene;
+  // const { translate } = view;
+  // ctx.clearRect(-translate.x, -translate.y, canvas.width, canvas.height);
+  // ctx.drawImage(floorCanvas, 0, 0);
+  // ctx.drawImage(entityCanvas, 0, 0);
 };
 
 export { renderFrame, renderStaticFrame };
