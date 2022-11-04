@@ -15,8 +15,6 @@ const panCameraKeys = (delta) => {
     entityCtx,
     entityCanvas,
     topCtx,
-    swapCtx,
-    swapCanvas,
   } = scene;
   const { translate } = view;
 

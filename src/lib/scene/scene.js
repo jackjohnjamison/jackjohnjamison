@@ -34,9 +34,6 @@ scene.start = async (map) => {
   scene.topCanvas = document.getElementById("topCanvas");
   scene.topCtx = scene.topCanvas.getContext("2d");
 
-  scene.swapCanvas = new OffscreenCanvas(0, 0);
-  scene.swapCtx = scene.swapCanvas.getContext("2d");
-
   scene.effectsMiddle = () => {};
   scene.effectsTop = () => {};
 
