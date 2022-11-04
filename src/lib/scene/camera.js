@@ -4,9 +4,20 @@ import { friction, cameraAcceleration } from "../constants";
 
 let velocityX = 0;
 let velocityY = 0;
+let translatePrevious = {};
 
 const panCameraKeys = (delta) => {
-  const { view, floorCtx, midCtx, entityCtx, topCtx } = scene;
+  const {
+    view,
+    floorCtx,
+    floorCanvas,
+    midCtx,
+    entityCtx,
+    entityCanvas,
+    topCtx,
+    swapCtx,
+    swapCanvas,
+  } = scene;
   const { translate } = view;
 
   const arrowUp = keyCheck("KeyW");
@@ -27,29 +38,33 @@ const panCameraKeys = (delta) => {
   velocityY *= friction;
 
   floorCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+  floorCtx.globalCompositeOperation = "copy";
+  floorCtx.drawImage(floorCanvas, -translatePrevious.x, -translatePrevious.y);
+  floorCtx.globalCompositeOperation = "source-over";
+
   midCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+
   entityCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+  entityCtx.globalCompositeOperation = "copy";
+  entityCtx.drawImage(entityCanvas, -translatePrevious.x, -translatePrevious.y);
+  entityCtx.globalCompositeOperation = "source-over";
+
   topCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+
+  translatePrevious = {
+    x: translate.x,
+    y: translate.y,
+  };
 };
 
 // TODO auto scroll function for when the player nears the edges of the map
+// THIS FUNCTION WORKS BECAUSE THE FUNCTION ABOVE IS RUN ON EVERY FRAME
 const panCameraTo = (x, y) => {
-  const { view, floorCtx, midCtx, entityCtx, topCtx } = scene;
+  const { view } = scene;
   const { translate } = view;
 
-  console.log(x);
-
-  translate.x = Math.round(x);
-  translate.y = Math.round(y);
-
-  floorCtx.setTransform(1, 0, 0, 1, x, y);
-  floorCtx.globalCompositeOperation = "copy";
-  floorCtx.drawImage(floorCtx.canvas, 0, 0);
-  floorCtx.globalCompositeOperation = "source-over";
-
-  midCtx.setTransform(1, 0, 0, 1, x, y);
-  entityCtx.setTransform(1, 0, 0, 1, x, y);
-  topCtx.setTransform(1, 0, 0, 1, x, y);
+  translate.x = x;
+  translate.y = y;
 };
 
 export { panCameraKeys, panCameraTo };

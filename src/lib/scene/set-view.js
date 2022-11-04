@@ -11,6 +11,7 @@ const setView = ({ xTiles, yTiles }) => {
     midCanvas,
     entityCanvas,
     topCanvas,
+    swapCanvas,
     canvasRoot,
   } = scene;
 
@@ -47,12 +48,14 @@ const setView = ({ xTiles, yTiles }) => {
       midCanvas.width =
       entityCanvas.width =
       topCanvas.width =
+      swapCanvas.width =
         canvasRoot.clientWidth;
 
     floorCanvas.height =
       midCanvas.height =
       entityCanvas.height =
       topCanvas.height =
+      swapCanvas.height =
         canvasRoot.clientHeight;
 
     // Resets translation wiped out by resize

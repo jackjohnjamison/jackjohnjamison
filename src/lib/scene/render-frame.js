@@ -26,7 +26,6 @@ const renderFrame = (delta) => {
   effectsMiddle();
 
   scene.entities.forEach((entity) => {
-    // // // DO NOT DELETE
     entity.update(delta);
   });
 
