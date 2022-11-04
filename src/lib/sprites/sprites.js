@@ -46,8 +46,6 @@ sprites.load = async () => {
   const despoiler = loadImage(`${imageAssetPath}pt-despoiler.png`);
   const sheild = loadImage(`${imageAssetPath}pt-sheild.png`);
 
-  //////////////////////////////////////////////////
-
   sprites.terracotta = [
     {
       yOffset: 0,
