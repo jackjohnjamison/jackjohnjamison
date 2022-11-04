@@ -26,11 +26,12 @@ const panCameraKeys = (delta) => {
 };
 
 // TODO auto scroll function for when the player nears the edges of the map
+// THIS FUNCTION WORKS BECAUSE THE FUNCTION ABOVE IS RUN ON EVERY FRAME
 const panCameraTo = (x, y) => {
   const { translate } = scene.view;
+
   translate.x = x;
   translate.y = y;
-  scene.ctx.setTransform(1, 0, 0, 1, x, y);
 };
 
 export { panCameraKeys, panCameraTo };
