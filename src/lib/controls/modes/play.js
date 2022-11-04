@@ -95,6 +95,7 @@ playMode.set = () => {
     const originY = mouse.dragStart.y;
     const areaWidth = -mouse.drag.x - translate.x;
     const areaHeight = -mouse.drag.y - translate.y;
+
     topCtx.rect(originX, originY, areaWidth, areaHeight);
     topCtx.stroke();
     // horizontalTileSelection(originX, originY, areaWidth);

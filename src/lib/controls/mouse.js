@@ -27,19 +27,7 @@ const mouseTracker = (element) => {
     if (mouse.buttonCode === 1) {
       mouse.isDragged = true;
 
-      const mouseDragX = mouse.dragStart.x - mouse.x - translate.x;
-      const mouseDragY = mouse.dragStart.y - mouse.y - translate.y;
-
-      // This limits drag speed to half the dimension of a tile on that axis
-      mouse.drag.x = Math.max(
-        mouse.drag.x - tileHalfWidth,
-        Math.min(mouseDragX, mouse.drag.x + tileHalfWidth)
-      );
-      mouse.drag.y = Math.max(
-        mouse.drag.y - tileHalfWidth,
-        Math.min(mouseDragY, mouse.drag.y + tileHalfHeight)
-      );
-
+      mouse.drag.x = mouse.dragStart.x - mouse.x - translate.x;
       mouse.drag.y = mouse.dragStart.y - mouse.y - translate.y;
     }
 

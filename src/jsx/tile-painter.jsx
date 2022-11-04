@@ -19,7 +19,6 @@ const spriteSize = {}
 let [ selectedTileSet ] = Object.keys(tileTypes)
 let selectedSetType = tileTypes[selectedTileSet].type
 let selectedTileSetSprites
-console.log(selectedTileSetSprites);
 let tileSets = []
 
 const resetBrushes = (e) => {

@@ -1,11 +1,13 @@
 import { scene } from "../scene";
+import { drawImageTile } from ".";
 import { positionToTileIndex, highlightTile } from ".";
+import { getSpriteImage } from "../sprites";
 import { tileWidth, tileHalfWidth, tileHalfHeight } from "../constants";
 
 const tileOverCount = 5;
 
 const loopTiles = (startTile, columns, rows) => {
-  const { xTiles, yTiles } = scene.tileMap;
+  const { xTiles, yTiles, tiles } = scene.tileMap;
 
   for (let j = 0; j < rows; j++) {
     const xOffset = -Math.floor(j / 2) + 1;
@@ -24,12 +26,26 @@ const loopTiles = (startTile, columns, rows) => {
     );
 
     for (let i = columnStart; i < columnEnd; i++) {
-      const tile = {
-        x: startTile.x + i + xOffset,
-        y: startTile.y + i + yOffset,
-      };
+      // const tile = {
+      //   x: startTile.x + i + xOffset,
+      //   y: startTile.y + i + yOffset,
+      // };
+      // console.log("IRAN");
+      // highlightTile(tile, "orange");
 
-      highlightTile(tile, "orange");
+      const tile = tiles[startTile.x + i + xOffset][startTile.y + i + yOffset];
+
+      if (tile.floor) {
+        const { set, color, variant } = tile.floor;
+
+        drawImageTile({
+          x: startTile.x + i + xOffset,
+          y: startTile.y + i + yOffset,
+          image: getSpriteImage(set, color, variant),
+        });
+      }
+
+      // renderEntities(x, y);
     }
   }
 };

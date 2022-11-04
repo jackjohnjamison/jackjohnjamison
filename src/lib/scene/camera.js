@@ -1,5 +1,6 @@
 import { scene } from ".";
 import { keyCheck } from "../controls";
+import { rectangularTileSelection } from "../map";
 import { friction, cameraAcceleration } from "../constants";
 
 let velocityX = 0;
@@ -35,27 +36,66 @@ const panCameraKeys = (delta) => {
   velocityX *= friction;
   velocityY *= friction;
 
-  floorCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
-  floorCtx.globalCompositeOperation = "copy";
-  floorCtx.drawImage(floorCanvas, -translatePrevious.x, -translatePrevious.y);
-  floorCtx.globalCompositeOperation = "source-over";
+  console.log(translate.x, translatePrevious.x);
 
-  midCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+  if (
+    translate.x !== translatePrevious.x ||
+    translate.y !== translatePrevious.y
+  ) {
+    floorCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+    floorCtx.globalCompositeOperation = "copy";
+    floorCtx.drawImage(floorCanvas, -translatePrevious.x, -translatePrevious.y);
+    floorCtx.globalCompositeOperation = "source-over";
 
-  entityCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
-  entityCtx.globalCompositeOperation = "copy";
-  entityCtx.drawImage(entityCanvas, -translatePrevious.x, -translatePrevious.y);
-  entityCtx.globalCompositeOperation = "source-over";
+    midCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
 
-  topCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+    entityCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+    entityCtx.globalCompositeOperation = "copy";
+    entityCtx.drawImage(
+      entityCanvas,
+      -translatePrevious.x,
+      -translatePrevious.y
+    );
+    entityCtx.globalCompositeOperation = "source-over";
 
-  translatePrevious = {
-    x: translate.x,
-    y: translate.y,
-  };
+    topCtx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+
+    /// /// /// /// /// Redraw
+    midCtx.strokeStyle = "aqua";
+    midCtx.beginPath();
+
+    const boundingBoxOrigingX = 0 - translate.x;
+    const boundingBoxWidth = floorCanvas.width;
+
+    const boundingBoxOrigingY = floorCanvas.height - translate.y;
+    const boundingBoxHeight = translate.y - translatePrevious.y;
+
+    // console.log(floorCanvas.height - translate.y);
+    // midCtx.rect(
+    //   boundingBoxOrigingX,
+    //   boundingBoxOrigingY,
+    //   boundingBoxWidth,
+    //   boundingBoxHeight
+    // );
+
+    // midCtx.stroke();
+
+    rectangularTileSelection(
+      boundingBoxOrigingX,
+      boundingBoxOrigingY,
+      boundingBoxWidth,
+      boundingBoxHeight
+    );
+
+    ///
+
+    translatePrevious = {
+      x: translate.x,
+      y: translate.y,
+    };
+  }
 };
 
-// TODO auto scroll function for when the player nears the edges of the map
 // THIS FUNCTION WORKS BECAUSE THE FUNCTION ABOVE IS RUN ON EVERY FRAME
 const panCameraTo = (x, y) => {
   const { view } = scene;
