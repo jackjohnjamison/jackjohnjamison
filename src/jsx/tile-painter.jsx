@@ -18,7 +18,8 @@ const spriteHue = {}
 const spriteSize = {}
 let [ selectedTileSet ] = Object.keys(tileTypes)
 let selectedSetType = tileTypes[selectedTileSet].type
-let selectedTileSetSprites = sprites[selectedTileSet]
+let selectedTileSetSprites
+console.log(selectedTileSetSprites);
 let tileSets = []
 
 const resetBrushes = (e) => {
@@ -184,6 +185,8 @@ const SpriteBrushes = () => {
 }
 
 const TilePainter = () => {
+  selectedTileSetSprites = sprites[selectedTileSet]
+
   return (
     <form id="tilePainter">
       <select id="terrainType" name="terrainType" onChange={ resetBrushes }>
