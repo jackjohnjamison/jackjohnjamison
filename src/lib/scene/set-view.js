@@ -2,7 +2,15 @@ import { scene, renderStaticFrame } from ".";
 import { tileWidth, tileHeight, paddingBottom, paddingTop } from "../constants";
 
 const setView = ({ xTiles, yTiles }) => {
-  const { ctx2, ctx3, ctx4, canvas2, canvas3, canvas4, canvasRoot } = scene;
+  const {
+    ctx2,
+    ctx4,
+    canvas2,
+    entityCanvas,
+    canvas4,
+    canvasRoot,
+    floorCanvas,
+  } = scene;
 
   const baseHeight = ((xTiles + yTiles) / 2) * tileHeight;
 
@@ -11,8 +19,8 @@ const setView = ({ xTiles, yTiles }) => {
   const height = baseHeight + paddingBottom + paddingTop;
 
   // Sets floor and entity canvas size
-  scene.floorCanvas.width = scene.entityCanvas.width = width;
-  scene.floorCanvas.height = scene.entityCanvas.height = height;
+  floorCanvas.width = entityCanvas.width = width;
+  floorCanvas.height = entityCanvas.height = height;
 
   // The exactly fits the grid in the center on the Y axis
   const baseOriginY =
@@ -33,16 +41,10 @@ const setView = ({ xTiles, yTiles }) => {
   };
 
   const setApertureSize = () => {
-    // canvas1.width =
-    canvas2.width = canvas3.width = canvas4.width = canvasRoot.clientWidth;
+    canvas2.width = canvas4.width = canvasRoot.clientWidth;
+    canvas2.height = canvas4.height = canvasRoot.clientHeight;
 
-    // canvas1.height =
-    canvas2.height = canvas3.height = canvas4.height = canvasRoot.clientHeight;
-
-    // Resets translation wiped out by resize
-    // ctx1.setTransform(1, 0, 0, 1, translate.x, translate.y);
     ctx2.setTransform(1, 0, 0, 1, translate.x, translate.y);
-    ctx3.setTransform(1, 0, 0, 1, translate.x, translate.y);
     ctx4.setTransform(1, 0, 0, 1, translate.x, translate.y);
   };
 

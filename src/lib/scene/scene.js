@@ -19,31 +19,21 @@ scene.start = async (map) => {
   scene.canvasRoot = Root();
   root.replaceWith(scene.canvasRoot);
 
-  // Canvas 1 for floor tiles
-  scene.floorCanvas = document.getElementById("canvas1");
+  scene.floorCanvas = document.getElementById("floorCanvas");
   scene.floorCtx = scene.floorCanvas.getContext("2d");
 
   // Canvas 2 for ui effects
   scene.canvas2 = document.getElementById("canvas2");
   scene.ctx2 = scene.canvas2.getContext("2d");
 
-  // Canvas 3 for entites
-  scene.canvas3 = document.getElementById("canvas3");
-  scene.ctx3 = scene.canvas3.getContext("2d");
+  scene.entityCanvas = document.getElementById("entityCanvas");
+  scene.entityCtx = scene.entityCanvas.getContext("2d");
 
   // Canvas 4 for ui effects and mouse interactions
   scene.canvas4 = document.getElementById("canvas4");
   scene.ctx4 = scene.canvas4.getContext("2d");
 
   scene.monitor = frameRateMonitor();
-
-  // Used for drawing the floor tiles in one piece
-  // scene.floorCanvas = new OffscreenCanvas(0, 0);
-  // scene.floorCanvas = scene.canvas1.transferControlToOffscreen();
-  // scene.floorCtx = scene.floorCanvas.getContext("2d");
-
-  scene.entityCanvas = new OffscreenCanvas(0, 0);
-  scene.entityCtx = scene.entityCanvas.getContext("2d");
 
   scene.effectsMiddle = () => {};
   scene.effectsTop = () => {};

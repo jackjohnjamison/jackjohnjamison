@@ -10,9 +10,9 @@ const translatePrevious = { x: 0, y: 0 };
 const panCameraKeys = (delta) => {
   const {
     ctx2,
-    ctx3,
     ctx4,
     floorCanvas,
+    entityCanvas,
     view: { translate },
   } = scene;
 
@@ -34,14 +34,11 @@ const panCameraKeys = (delta) => {
     floorCanvas.style.left = `${translate.x}px`;
     floorCanvas.style.top = `${translate.y}px`;
 
-    // console.log(floorCtx);
+    entityCanvas.style.left = `${translate.x}px`;
+    entityCanvas.style.top = `${translate.y}px`;
 
     ctx2.setTransform(1, 0, 0, 1, translate.x, translate.y);
-    ctx3.setTransform(1, 0, 0, 1, translate.x, translate.y);
     ctx4.setTransform(1, 0, 0, 1, translate.x, translate.y);
-
-    // ctx1.clearRect(-translate.x, -translate.y, width, height);
-    // ctx1.drawImage(floorCanvas, 0, 0);
 
     translatePrevious.x = translate.x;
     translatePrevious.y = translate.y;
