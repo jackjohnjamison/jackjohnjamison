@@ -20,8 +20,8 @@ scene.start = async (map) => {
   root.replaceWith(scene.canvasRoot);
 
   // Canvas 1 for floor tiles
-  scene.canvas1 = document.getElementById("canvas1");
-  scene.ctx1 = scene.canvas1.getContext("2d");
+  scene.floorCanvas = document.getElementById("canvas1");
+  scene.floorCtx = scene.floorCanvas.getContext("2d");
 
   // Canvas 2 for ui effects
   scene.canvas2 = document.getElementById("canvas2");
@@ -38,8 +38,9 @@ scene.start = async (map) => {
   scene.monitor = frameRateMonitor();
 
   // Used for drawing the floor tiles in one piece
-  scene.floorCanvas = new OffscreenCanvas(0, 0);
-  scene.floorCtx = scene.floorCanvas.getContext("2d");
+  // scene.floorCanvas = new OffscreenCanvas(0, 0);
+  // scene.floorCanvas = scene.canvas1.transferControlToOffscreen();
+  // scene.floorCtx = scene.floorCanvas.getContext("2d");
 
   scene.entityCanvas = new OffscreenCanvas(0, 0);
   scene.entityCtx = scene.entityCanvas.getContext("2d");

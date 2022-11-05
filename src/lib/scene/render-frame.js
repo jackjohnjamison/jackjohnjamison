@@ -12,7 +12,7 @@ const renderFrame = (delta) => {
     effectsMiddle,
     effectsTop,
     entities,
-    canvas1: { width, height },
+    canvas2: { width, height },
   } = scene;
   const { translate } = view;
 
@@ -37,13 +37,13 @@ const renderStaticFrame = () => {
     floorCanvas,
     entityCanvas,
     view,
-    canvas1: { width, height },
+    canvas2: { width, height },
   } = scene;
 
   const { translate } = view;
 
-  ctx1.clearRect(-translate.x, -translate.y, width, height);
-  ctx1.drawImage(floorCanvas, 0, 0);
+  // ctx1.clearRect(-translate.x, -translate.y, width, height);
+  // ctx1.drawImage(floorCanvas, 0, 0);
 
   ctx3.clearRect(-translate.x, -translate.y, width, height);
   ctx3.drawImage(entityCanvas, 0, 0);
