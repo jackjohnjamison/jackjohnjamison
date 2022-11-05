@@ -23,22 +23,22 @@ scene.start = async (map) => {
   scene.floorCtx = scene.floorCanvas.getContext("2d");
 
   // Canvas 2 for ui effects
-  scene.canvas2 = document.getElementById("canvas2");
-  scene.ctx2 = scene.canvas2.getContext("2d");
+  scene.canvasMid = document.getElementById("canvasMid");
+  scene.ctxMid = scene.canvasMid.getContext("2d");
 
   scene.entityCanvas = document.getElementById("entityCanvas");
   scene.entityCtx = scene.entityCanvas.getContext("2d");
 
   // Canvas 4 for ui effects and mouse interactions
-  scene.canvas4 = document.getElementById("canvas4");
-  scene.ctx4 = scene.canvas4.getContext("2d");
+  scene.canvasTop = document.getElementById("canvasTop");
+  scene.ctxTop = scene.canvasTop.getContext("2d");
 
   scene.monitor = frameRateMonitor();
 
   scene.effectsMiddle = () => {};
   scene.effectsTop = () => {};
 
-  scene.mouse = mouseTracker(scene.canvas4);
+  scene.mouse = mouseTracker(scene.canvasTop);
 
   scene.view = setView({
     xTiles: mapSize,

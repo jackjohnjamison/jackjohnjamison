@@ -2,13 +2,13 @@ import { scene } from ".";
 
 const renderFrame = (delta) => {
   const {
-    ctx2,
-    ctx4,
+    ctxMid,
+    ctxTop,
     view,
     effectsMiddle,
     effectsTop,
     entities,
-    canvas2: { width, height },
+    canvasMid: { width, height },
   } = scene;
   const { translate } = view;
 
@@ -16,10 +16,10 @@ const renderFrame = (delta) => {
     entity.update(delta);
   });
 
-  ctx2.clearRect(-translate.x, -translate.y, width, height);
+  ctxMid.clearRect(-translate.x, -translate.y, width, height);
   effectsMiddle();
 
-  ctx4.clearRect(-translate.x, -translate.y, width, height);
+  ctxTop.clearRect(-translate.x, -translate.y, width, height);
   effectsTop();
 };
 

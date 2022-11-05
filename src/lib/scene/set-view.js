@@ -3,11 +3,11 @@ import { tileWidth, tileHeight, paddingBottom, paddingTop } from "../constants";
 
 const setView = ({ xTiles, yTiles }) => {
   const {
-    ctx2,
-    ctx4,
-    canvas2,
+    ctxMid,
+    ctxTop,
+    canvasMid,
     entityCanvas,
-    canvas4,
+    canvasTop,
     canvasRoot,
     floorCanvas,
   } = scene;
@@ -41,11 +41,11 @@ const setView = ({ xTiles, yTiles }) => {
   };
 
   const setApertureSize = () => {
-    canvas2.width = canvas4.width = canvasRoot.clientWidth;
-    canvas2.height = canvas4.height = canvasRoot.clientHeight;
+    canvasMid.width = canvasTop.width = canvasRoot.clientWidth;
+    canvasMid.height = canvasTop.height = canvasRoot.clientHeight;
 
-    ctx2.setTransform(1, 0, 0, 1, translate.x, translate.y);
-    ctx4.setTransform(1, 0, 0, 1, translate.x, translate.y);
+    ctxMid.setTransform(1, 0, 0, 1, translate.x, translate.y);
+    ctxTop.setTransform(1, 0, 0, 1, translate.x, translate.y);
   };
 
   onresize = () => {

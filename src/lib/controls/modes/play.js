@@ -13,7 +13,7 @@ const playMode = {};
 const noop = () => {};
 
 playMode.set = () => {
-  const { hoveredTile, mouse, player, ctx2, ctx4, canvas4 } = scene;
+  const { hoveredTile, mouse, player, ctxMid, ctxTop, canvasTop } = scene;
 
   mouse.onMouseMove = () => {
     if (mouse.buttonCode === 1) {
@@ -34,44 +34,54 @@ playMode.set = () => {
 
     if (hoveredTile.tileIndex) {
       if (mouse.isDragged) {
-        canvas4.style.cursor = "grabbing";
+        canvasTop.style.cursor = "grabbing";
       } else {
-        canvas4.style.cursor = "pointer";
+        canvasTop.style.cursor = "pointer";
       }
 
       hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
     } else {
-      canvas4.style.cursor = "default";
+      canvasTop.style.cursor = "default";
     }
   };
 
   scene.effectsMiddle = () => {
     if (player.isMoving) {
-      breadcrumbTrail(player.path, "lime", false, ctx2);
+      breadcrumbTrail(player.path, "lime", false, ctxMid);
     } else if (hoveredTile.tileIndex) {
-      breadcrumbTrail(hoveredTile.path, "lime", false, ctx2);
+      breadcrumbTrail(hoveredTile.path, "lime", false, ctxMid);
     }
   };
 
   scene.effectsTop = () => {
     if (player.isMoving) {
-      breadcrumbTrail(player.path, "rgba(50, 205, 50, 0.5)", true, ctx4);
+      breadcrumbTrail(player.path, "rgba(50, 205, 50, 0.5)", true, ctxTop);
 
       if (hoveredTile.tileIndex) {
         if (isWalkable(hoveredTile.tileIndex)) {
           const position = tileIndexToPosition(hoveredTile.tileIndex);
-          drawEllipse(position, hoveredTileOutlineColor, baseMarkerSize, ctx4);
+          drawEllipse(
+            position,
+            hoveredTileOutlineColor,
+            baseMarkerSize,
+            ctxTop
+          );
         } else {
           highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
         }
       }
     } else if (hoveredTile.tileIndex) {
-      breadcrumbTrail(hoveredTile.path, "rgba(50, 205, 50, 0.5)", false, ctx4);
+      breadcrumbTrail(
+        hoveredTile.path,
+        "rgba(50, 205, 50, 0.5)",
+        false,
+        ctxTop
+      );
 
       if (hoveredTile.tileIndex) {
         if (isWalkable(hoveredTile.tileIndex)) {
           const position = tileIndexToPosition(hoveredTile.tileIndex);
-          drawEllipse(position, "lime", baseMarkerSize, ctx4);
+          drawEllipse(position, "lime", baseMarkerSize, ctxTop);
         } else {
           highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
         }

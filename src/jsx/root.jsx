@@ -9,9 +9,9 @@ const Root = () => {
       <Toolbar />
       <div id="canvasRoot">
         <canvas class="layer-canvas" id="floorCanvas" />
-        <canvas class="layer-canvas" id="canvas2" />
+        <canvas class="layer-canvas" id="canvasMid" />
         <canvas class="layer-canvas" id="entityCanvas" />
-        <canvas class="layer-canvas" id="canvas4" />
+        <canvas class="layer-canvas" id="canvasTop" />
         <div id="ui" />
         <PauseMenu />
       </div>
