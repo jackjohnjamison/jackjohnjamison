@@ -19,16 +19,19 @@ scene.start = async (map) => {
   scene.canvasRoot = Root();
   root.replaceWith(scene.canvasRoot);
 
-  // Set canvas and context
+  // Canvas 1 for floor tiles
   scene.canvas1 = document.getElementById("canvas1");
   scene.ctx1 = scene.canvas1.getContext("2d");
 
+  // Canvas 2 for ui effects
   scene.canvas2 = document.getElementById("canvas2");
   scene.ctx2 = scene.canvas2.getContext("2d");
 
+  // Canvas 3 for entites
   scene.canvas3 = document.getElementById("canvas3");
   scene.ctx3 = scene.canvas3.getContext("2d");
 
+  // Canvas 4 for ui effects and mouse interactions
   scene.canvas4 = document.getElementById("canvas4");
   scene.ctx4 = scene.canvas4.getContext("2d");
 
@@ -44,7 +47,7 @@ scene.start = async (map) => {
   scene.effectsMiddle = () => {};
   scene.effectsTop = () => {};
 
-  scene.mouse = mouseTracker(scene.canvas1);
+  scene.mouse = mouseTracker(scene.canvas4);
 
   scene.view = setView({
     xTiles: mapSize,

@@ -1,45 +1,44 @@
-import { scene } from "../scene";
 import { tileIndexToPosition } from "../map";
 import { drawEllipse } from ".";
 import { tileHeight, centerOffsetX, centerOffsetY } from "../constants";
 
 const crumbWidth = 16;
 const pinProportion = 0.86;
+const pinColor = "lime";
 
 const transparentFill = "rgba(150, 150, 150, 0.8)";
 
-const breadcrumbTrail = (path, color, pin, pinColor) => {
-  const { ctx1 } = scene;
+const breadcrumbTrail = (path, color, pin, ctx) => {
   const pathLength = path.length;
 
   path.forEach((step, i) => {
     const [y, x] = step;
     const position = tileIndexToPosition({ y, x });
 
-    drawEllipse(position, color, crumbWidth, ctx1);
+    drawEllipse(position, color, crumbWidth, ctx);
 
     if (pin && i === pathLength - 1) {
       const centerX = position.x + centerOffsetX;
       const centerY = position.y + centerOffsetY;
 
-      ctx1.beginPath();
-      ctx1.moveTo(centerX, centerY);
-      ctx1.lineTo(
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(
         centerX - crumbWidth / 3,
         centerY - tileHeight * pinProportion * 1.5
       );
-      ctx1.lineTo(centerX, centerY - tileHeight * 1.5);
-      ctx1.lineTo(
+      ctx.lineTo(centerX, centerY - tileHeight * 1.5);
+      ctx.lineTo(
         centerX + crumbWidth / 3,
         centerY - tileHeight * pinProportion * 1.5
       );
-      ctx1.closePath();
+      ctx.closePath();
 
-      ctx1.fillStyle = transparentFill;
-      ctx1.strokeStyle = pinColor;
+      ctx.fillStyle = transparentFill;
+      ctx.strokeStyle = pinColor;
 
-      ctx1.fill();
-      ctx1.stroke();
+      ctx.fill();
+      ctx.stroke();
     }
   });
 };
