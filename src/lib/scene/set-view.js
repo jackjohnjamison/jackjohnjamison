@@ -1,4 +1,4 @@
-import { scene, renderStaticFrame } from ".";
+import { scene } from ".";
 import { tileWidth, tileHeight, paddingBottom, paddingTop } from "../constants";
 
 const setView = ({ xTiles, yTiles }) => {
@@ -50,7 +50,6 @@ const setView = ({ xTiles, yTiles }) => {
 
   onresize = () => {
     setApertureSize();
-    renderStaticFrame();
   };
 
   return {

@@ -1,4 +1,4 @@
-import { scene, renderStaticFrame } from ".";
+import { scene } from ".";
 import { renderEntities } from "../entities";
 import { renderGrid } from "../map";
 
@@ -12,8 +12,6 @@ const firstRender = () => {
       renderEntities(x, y);
     }
   }
-
-  renderStaticFrame();
 };
 
 export { firstRender };
