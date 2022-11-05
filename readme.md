@@ -55,5 +55,5 @@ https://jsbench.me/
 *** Known bugs and issues ***
 - Add a favicon already
 - Hue rotate on tiles doesn't work in FireFox
-- General performance issues on FireFox
+- Tile stacking order on FireFox
 - Black screen of doom! (maybe fixed)
