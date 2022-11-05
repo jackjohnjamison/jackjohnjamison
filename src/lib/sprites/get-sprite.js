@@ -1,6 +1,6 @@
 import { sprites } from "./sprites";
 
-const canvas = new OffscreenCanvas(0, 0);
+const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d");
 
 const colorize = (sprite, color) => {

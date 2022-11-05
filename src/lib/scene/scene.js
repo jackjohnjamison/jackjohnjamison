@@ -20,7 +20,7 @@ scene.start = async (map) => {
   root.replaceWith(scene.canvasRoot);
 
   scene.floorCanvas = document.getElementById("floorCanvas");
-  scene.floorCtx = scene.floorCanvas.getContext("2d");
+  scene.floorCtx = scene.floorCanvas.getContext("2d", { alpha: false });
 
   // Canvas 2 for ui effects
   scene.canvasMid = document.getElementById("canvasMid");

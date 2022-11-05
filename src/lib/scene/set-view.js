@@ -3,13 +3,15 @@ import { tileWidth, tileHeight, paddingBottom, paddingTop } from "../constants";
 
 const setView = ({ xTiles, yTiles }) => {
   const {
+    canvasRoot,
+    floorCtx,
     ctxMid,
+    entityCtx,
     ctxTop,
+    floorCanvas,
     canvasMid,
     entityCanvas,
     canvasTop,
-    canvasRoot,
-    floorCanvas,
   } = scene;
 
   const baseHeight = ((xTiles + yTiles) / 2) * tileHeight;
@@ -45,7 +47,12 @@ const setView = ({ xTiles, yTiles }) => {
     canvasMid.height = canvasTop.height = canvasRoot.clientHeight;
 
     ctxMid.setTransform(1, 0, 0, 1, translate.x, translate.y);
+    ctxMid.imageSmoothingEnabled = false;
     ctxTop.setTransform(1, 0, 0, 1, translate.x, translate.y);
+    ctxTop.imageSmoothingEnabled = false;
+
+    floorCtx.imageSmoothingEnabled = false;
+    entityCtx.imageSmoothingEnabled = false;
   };
 
   onresize = () => {

@@ -43,8 +43,9 @@ https://davidmold.medium.com/use-vite-for-jsx-without-react-e59aed9460f5
 Offscreen canvas!?
 https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas
 
-Canvas guide
+Canvas guides
 https://developer.chrome.com/blog/canvas2d/
+https://hacks.mozilla.org/2013/05/optimizing-your-javascript-game-for-firefox-os/
 
 Move the canvas to a webworker?
 https://developer.chrome.com/blog/offscreen-canvas/
@@ -54,6 +55,4 @@ https://jsbench.me/
 
 *** Known bugs and issues ***
 - Add a favicon already
-- Hue rotate on tiles doesn't work in FireFox
-- Tile stacking order on FireFox
-- Black screen of doom! (maybe fixed)
+- Some remaining performance issues in FF
