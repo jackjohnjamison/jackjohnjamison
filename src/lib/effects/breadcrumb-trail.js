@@ -9,37 +9,37 @@ const pinProportion = 0.86;
 const transparentFill = "rgba(150, 150, 150, 0.8)";
 
 const breadcrumbTrail = (path, color, pin, pinColor) => {
-  const { ctx } = scene;
+  const { ctx1 } = scene;
   const pathLength = path.length;
 
   path.forEach((step, i) => {
     const [y, x] = step;
     const position = tileIndexToPosition({ y, x });
 
-    drawEllipse(position, color, crumbWidth, ctx);
+    drawEllipse(position, color, crumbWidth, ctx1);
 
     if (pin && i === pathLength - 1) {
       const centerX = position.x + centerOffsetX;
       const centerY = position.y + centerOffsetY;
 
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-      ctx.lineTo(
+      ctx1.beginPath();
+      ctx1.moveTo(centerX, centerY);
+      ctx1.lineTo(
         centerX - crumbWidth / 3,
         centerY - tileHeight * pinProportion * 1.5
       );
-      ctx.lineTo(centerX, centerY - tileHeight * 1.5);
-      ctx.lineTo(
+      ctx1.lineTo(centerX, centerY - tileHeight * 1.5);
+      ctx1.lineTo(
         centerX + crumbWidth / 3,
         centerY - tileHeight * pinProportion * 1.5
       );
-      ctx.closePath();
+      ctx1.closePath();
 
-      ctx.fillStyle = transparentFill;
-      ctx.strokeStyle = pinColor;
+      ctx1.fillStyle = transparentFill;
+      ctx1.strokeStyle = pinColor;
 
-      ctx.fill();
-      ctx.stroke();
+      ctx1.fill();
+      ctx1.stroke();
     }
   });
 };

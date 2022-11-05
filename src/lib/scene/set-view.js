@@ -2,7 +2,7 @@ import { scene, renderStaticFrame } from ".";
 import { tileWidth, tileHeight, paddingBottom, paddingTop } from "../constants";
 
 const setView = ({ xTiles, yTiles }) => {
-  const { ctx, canvas } = scene;
+  const { ctx1, canvas1, canvasRoot } = scene;
 
   const baseHeight = ((xTiles + yTiles) / 2) * tileHeight;
 
@@ -33,10 +33,10 @@ const setView = ({ xTiles, yTiles }) => {
   };
 
   const setApertureSize = () => {
-    canvas.width = canvasRoot.clientWidth;
-    canvas.height = canvasRoot.clientHeight;
+    canvas1.width = canvasRoot.clientWidth;
+    canvas1.height = canvasRoot.clientHeight;
     // Resets translation wiped out by resize
-    ctx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+    ctx1.setTransform(1, 0, 0, 1, translate.x, translate.y);
   };
 
   onresize = () => {

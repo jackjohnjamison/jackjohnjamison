@@ -17,7 +17,7 @@ const editMode = {};
 const noop = () => {};
 
 editMode.set = () => {
-  const { hoveredTile, mouse, player } = scene;
+  const { hoveredTile, mouse, player, canvas1 } = scene;
 
   // Sets initial state of the tile painter UI
   resetBrushes();
@@ -42,16 +42,16 @@ editMode.set = () => {
 
     if (hoveredTile.tileIndex) {
       if (mouse.isDragged) {
-        scene.canvas.style.cursor = "grabbing";
+        canvas1.style.cursor = "grabbing";
       } else {
-        scene.canvas.style.cursor = "pointer";
+        canvas1.style.cursor = "pointer";
       }
 
       hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
 
       if (mouse.buttonCode === 3) paintTile(hoveredTile.tileIndex);
     } else {
-      scene.canvas.style.cursor = "default";
+      canvas1.style.cursor = "default";
     }
   };
 

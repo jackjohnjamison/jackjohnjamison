@@ -13,7 +13,7 @@ const playMode = {};
 const noop = () => {};
 
 playMode.set = () => {
-  const { hoveredTile, mouse, player, ctx } = scene;
+  const { hoveredTile, mouse, player, ctx1, canvas1 } = scene;
 
   mouse.onMouseMove = () => {
     if (mouse.buttonCode === 1) {
@@ -34,14 +34,14 @@ playMode.set = () => {
 
     if (hoveredTile.tileIndex) {
       if (mouse.isDragged) {
-        scene.canvas.style.cursor = "grabbing";
+        canvas1.style.cursor = "grabbing";
       } else {
-        scene.canvas.style.cursor = "pointer";
+        canvas1.style.cursor = "pointer";
       }
 
       hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
     } else {
-      scene.canvas.style.cursor = "default";
+      canvas1.style.cursor = "default";
     }
   };
 
@@ -60,7 +60,7 @@ playMode.set = () => {
       if (hoveredTile.tileIndex) {
         if (isWalkable(hoveredTile.tileIndex)) {
           const position = tileIndexToPosition(hoveredTile.tileIndex);
-          drawEllipse(position, hoveredTileOutlineColor, baseMarkerSize, ctx);
+          drawEllipse(position, hoveredTileOutlineColor, baseMarkerSize, ctx1);
         } else {
           highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
         }
@@ -71,7 +71,7 @@ playMode.set = () => {
       if (hoveredTile.tileIndex) {
         if (isWalkable(hoveredTile.tileIndex)) {
           const position = tileIndexToPosition(hoveredTile.tileIndex);
-          drawEllipse(position, "lime", baseMarkerSize, ctx);
+          drawEllipse(position, "lime", baseMarkerSize, ctx1);
         } else {
           highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
         }

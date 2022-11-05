@@ -6,7 +6,10 @@ let velocityX = 0;
 let velocityY = 0;
 
 const panCameraKeys = (delta) => {
-  const { translate } = scene.view;
+  const {
+    ctx1,
+    view: { translate },
+  } = scene;
 
   const arrowUp = keyCheck("KeyW");
   const arrowDown = keyCheck("KeyS");
@@ -22,13 +25,15 @@ const panCameraKeys = (delta) => {
   velocityX *= friction;
   velocityY *= friction;
 
-  scene.ctx.setTransform(1, 0, 0, 1, translate.x, translate.y);
+  ctx1.setTransform(1, 0, 0, 1, translate.x, translate.y);
 };
 
 // TODO auto scroll function for when the player nears the edges of the map
 // THIS FUNCTION WORKS BECAUSE THE FUNCTION ABOVE IS RUN ON EVERY FRAME
 const panCameraTo = (x, y) => {
-  const { translate } = scene.view;
+  const {
+    view: { translate },
+  } = scene;
 
   translate.x = x;
   translate.y = y;

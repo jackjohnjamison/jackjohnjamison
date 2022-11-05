@@ -16,12 +16,21 @@ const scene = {};
 // Sets parts of the scene that don't change between map loads
 scene.start = async (map) => {
   const root = document.getElementById("root");
-  root.replaceWith(Root());
+  scene.canvasRoot = Root();
+  root.replaceWith(scene.canvasRoot);
 
   // Set canvas and context
-  scene.canvas = document.createElement("canvas");
-  scene.ctx = scene.canvas.getContext("2d");
-  canvasRoot.appendChild(scene.canvas);
+  scene.canvas1 = document.getElementById("canvas1");
+  scene.ctx1 = scene.canvas1.getContext("2d");
+
+  scene.canvas2 = document.getElementById("canvas2");
+  scene.ctx2 = scene.canvas2.getContext("2d");
+
+  scene.canvas3 = document.getElementById("canvas3");
+  scene.ctx3 = scene.canvas3.getContext("2d");
+
+  scene.canvas4 = document.getElementById("canvas4");
+  scene.ctx4 = scene.canvas4.getContext("2d");
 
   scene.monitor = frameRateMonitor();
 
@@ -35,7 +44,7 @@ scene.start = async (map) => {
   scene.effectsMiddle = () => {};
   scene.effectsTop = () => {};
 
-  scene.mouse = mouseTracker(scene.canvas);
+  scene.mouse = mouseTracker(scene.canvas1);
 
   scene.view = setView({
     xTiles: mapSize,

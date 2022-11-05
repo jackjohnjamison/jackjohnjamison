@@ -1,7 +1,6 @@
 import { scene } from ".";
 
-// HighlightTile used for debug
-import { tileIndexToPosition, drawImageTile, highlightTile } from "../map";
+import { tileIndexToPosition, drawImageTile } from "../map";
 import { getSpriteImage } from "../sprites";
 import { renderEntities } from "../entities";
 import { tileWidth, tileHeight } from "../constants";

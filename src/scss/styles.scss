@@ -42,6 +42,10 @@ body {
   overflow: hidden;
   background-color: #000;
   position: relative;
+
+  .layer-canvas {
+    position: absolute;
+  }
 }
 
 .monitor {
