@@ -99,6 +99,14 @@ const setTile = (tileIndex, tileMap, set, colors, variant = null) => {
   tile.walkable = walkable;
 };
 
+const JSONReplacer = (key, value) => {
+  if (key === "pathGrid") {
+    return;
+  }
+
+  return value;
+};
+
 const saveTileMaptoJSON = () => {
   const { tileMap, entities } = scene;
 
@@ -121,7 +129,7 @@ const saveTileMaptoJSON = () => {
 
   return (
     "data:text/json;charset=utf-8," +
-    encodeURIComponent(JSON.stringify(tileMap))
+    encodeURIComponent(JSON.stringify(tileMap, JSONReplacer))
   );
 };
 
@@ -131,7 +139,17 @@ const loadMapFromImport = async (map) => {
 };
 
 const loadTileMapFromJSON = (json) => {
-  return JSON.parse(json);
+  const mapObject = JSON.parse(json);
+  mapObject.pathGrid = new pathfinding.Grid(mapObject.xTiles, mapObject.yTiles);
+
+  for (let x = 0; x < mapObject.xTiles; x++) {
+    for (let y = 0; y < mapObject.yTiles; y++) {
+      const walkable = mapObject.tiles[x][y].walkable;
+      mapObject.pathGrid.setWalkableAt(x, y, walkable);
+    }
+  }
+
+  return mapObject;
 };
 
 export {

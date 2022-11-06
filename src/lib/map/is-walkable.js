@@ -3,7 +3,7 @@ import { scene } from "../scene";
 const isWalkable = ({ x, y }) => {
   const { pathGrid } = scene.tileMap;
 
-  // Yes this is backwards. That is just how path grid works ¯\_(ツ)_/¯
+  // Yes x and y are backwards. That is just how path grid works ¯\_(ツ)_/¯
   return pathGrid.nodes[y][x].walkable;
 };
 
