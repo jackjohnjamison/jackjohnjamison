@@ -16,7 +16,6 @@ https://jackjohnjamison.github.io/tiles/
 - Ongoing refactoring the mess
 - To class or not to class? Get advice so you can ignore it
 - Should the entity map use arrays and not objects at tile level?
-- Stop redrawing when objects are not in motion or the camera is not being panned
 - Undo button
 - Create entity interface
 - Actually design a game

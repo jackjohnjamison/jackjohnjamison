@@ -4,6 +4,7 @@ import { setView } from "./set-view";
 import { initSaveLoad } from "./save-load";
 import { createEntityMap, entity, unit, npc } from "../entities";
 import { onFrameFunctions } from "./on-frame-functions";
+import { panCameraTo } from "./camera";
 import { renderLoop } from "./render-loop";
 import { setMode, mouseTracker } from "../controls";
 import { mapSize } from "../constants";
@@ -115,6 +116,15 @@ scene.loadMap = (tileMap) => {
   setMode(scene.mode);
   scene.view.setApertureSize();
   firstRender();
+
+  // Centre camera on player
+  const camerCentreX = Math.round(
+    scene.canvasTop.width / 2 - scene.player.position.x
+  );
+  const camerCentreY = Math.round(
+    scene.canvasTop.height / 2 - scene.player.position.y
+  );
+  panCameraTo(camerCentreX, camerCentreY);
 };
 
 scene.setView = setView;
