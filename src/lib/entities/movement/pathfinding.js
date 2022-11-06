@@ -20,7 +20,6 @@ const pathfinding = (entity, speed) => {
     if (entity.isMoving) {
       const movementSpeed = speed * delta;
 
-      // Does this need to be calculated every frame?
       const xVelocity = movementSpeed * Math.cos(movementAngleRadians);
       const yVelocity = movementSpeed * Math.sin(movementAngleRadians);
 
