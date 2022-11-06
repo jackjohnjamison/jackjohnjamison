@@ -1,15 +1,16 @@
 import { scene } from "../scene";
 
 const isWalkable = ({ x, y }) => {
-  const { tileMap } = scene;
+  const { pathGrid } = scene.tileMap;
 
-  return tileMap.walkableTileMatrix?.[x]?.[y] === 0;
+  // Yes this is backwards. That is just how path grid works ¯\_(ツ)_/¯
+  return pathGrid.nodes[y][x].walkable;
 };
 
 const setWalkable = ({ x, y }, walkable) => {
-  const { tileMap } = scene;
+  const { pathGrid } = scene.tileMap;
 
-  tileMap.walkableTileMatrix[x][y] = walkable;
+  pathGrid.setWalkableAt(x, y, walkable);
 };
 
 export { isWalkable, setWalkable };

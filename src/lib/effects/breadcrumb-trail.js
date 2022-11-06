@@ -12,8 +12,8 @@ const breadcrumbTrail = (path, color, pin, ctx) => {
   const pathLength = path.length;
 
   path.forEach((step, i) => {
-    const [y, x] = step;
-    const position = tileIndexToPosition({ y, x });
+    const [x, y] = step;
+    const position = tileIndexToPosition({ x, y });
 
     drawEllipse(position, color, crumbWidth, ctx);
 

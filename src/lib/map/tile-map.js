@@ -1,6 +1,7 @@
 import { scene } from "../scene";
 import { tileTypes } from ".";
 import { sprites } from "../sprites";
+import pathfinding from "pathfinding";
 
 const getVariant = (set) => {
   return Math.floor(Math.random() * sprites[set].length);
@@ -9,14 +10,14 @@ const getVariant = (set) => {
 const createTileMapFromParams = ({ xTiles, yTiles }) => {
   const tileMap = {
     tiles: [],
-    walkableTileMatrix: [],
+    pathGrid: new pathfinding.Grid(xTiles, yTiles),
     xTiles,
     yTiles,
   };
 
+  // Initializes every tile as an empty object
   for (let x = 0; x < xTiles; x++) {
     tileMap.tiles[x] = [];
-    tileMap.walkableTileMatrix[x] = [];
 
     for (let y = 0; y < yTiles; y++) {
       tileMap.tiles[x][y] = {};
@@ -93,8 +94,9 @@ const setTile = (tileIndex, tileMap, set, colors, variant = null) => {
 
   tile.type = type;
 
+  // pathGrid holds the current walkable state of a wile. tile.walkable holds the default walkable state.
+  tileMap.pathGrid.setWalkableAt(x, y, walkable);
   tile.walkable = walkable;
-  tileMap.walkableTileMatrix[x][y] = walkable;
 };
 
 const saveTileMaptoJSON = () => {

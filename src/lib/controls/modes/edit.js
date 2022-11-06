@@ -59,7 +59,7 @@ editMode.set = () => {
     if (hoveredTile.tileIndex) {
       hoveredTile.path.forEach((tileIndex) => {
         highlightTile(
-          { x: tileIndex[1], y: tileIndex[0] },
+          { x: tileIndex[0], y: tileIndex[1] },
           pathTileOutlineColor
         );
       });
@@ -70,7 +70,7 @@ editMode.set = () => {
     if (hoveredTile.tileIndex) {
       hoveredTile.path.forEach((tileIndex) => {
         highlightTile(
-          { x: tileIndex[1], y: tileIndex[0] },
+          { x: tileIndex[0], y: tileIndex[1] },
           pathTileUnderOutlineColor
         );
       });

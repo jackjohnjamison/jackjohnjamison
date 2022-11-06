@@ -17,7 +17,7 @@ const createEntityMap = (tileMap) => {
   entityMap.addEntity = ({ tileIndex, id, render }) => {
     entityMap.entities[tileIndex.x][tileIndex.y][id] = render;
 
-    setWalkable(tileIndex, 1);
+    setWalkable(tileIndex, false);
   };
 
   entityMap.entityCheck = ({ x, y }) => {
@@ -34,6 +34,7 @@ const createEntityMap = (tileMap) => {
 
     if (noEntities) {
       const walkable = tileMap.tiles[x][y].walkable;
+      console.log(walkable);
       setWalkable(tileIndex, walkable);
     }
   };

@@ -71,6 +71,7 @@ playMode.set = () => {
       breadcrumbTrail(player.path, "rgba(50, 205, 50, 0.5)", true, ctxTop);
 
       if (hoveredTile.tileIndex) {
+        // Can we stop this recalculating or redrawing when the mouse isn't moving?
         if (isWalkable(hoveredTile.tileIndex)) {
           const position = tileIndexToPosition(hoveredTile.tileIndex);
           drawEllipse(

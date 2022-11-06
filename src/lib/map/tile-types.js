@@ -1,7 +1,7 @@
 const tileTypes = {
   mountain: {
     displayName: "Mountains",
-    walkable: 1,
+    walkable: false,
     floor: "mountain",
     feature: "mountainTop",
     type: "linked",
@@ -9,7 +9,7 @@ const tileTypes = {
 
   forest: {
     displayName: "Forest",
-    walkable: 0,
+    walkable: true,
     floor: "forest",
     feature: "forestTop",
     type: "linked",
@@ -17,21 +17,21 @@ const tileTypes = {
 
   terracotta: {
     displayName: "Terracotta Floor",
-    walkable: 0,
+    walkable: true,
     floor: "terracotta",
     type: "floor",
   },
 
   grass: {
     displayName: "Grass",
-    walkable: 0,
+    walkable: true,
     floor: "grass",
     type: "floor",
   },
 
   cube: {
     displayName: "Cube",
-    walkable: 1,
+    walkable: false,
     feature: "cube",
     floor: "terracotta",
     type: "feature",
@@ -39,14 +39,14 @@ const tileTypes = {
 
   water: {
     displayName: "Water",
-    walkable: 1,
+    walkable: false,
     floor: "water",
     type: "obstacle",
   },
 
   void: {
     displayName: "Void",
-    walkable: 1,
+    walkable: false,
     type: "void",
   },
 };

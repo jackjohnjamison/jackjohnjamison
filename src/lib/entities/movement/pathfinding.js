@@ -72,7 +72,7 @@ const pathfinding = (entity, speed) => {
 
   const setMoveTarget = () => {
     const [pathStep] = entity.path;
-    const [y, x] = pathStep;
+    const [x, y] = pathStep;
     const targetIndex = { x, y };
 
     if (isWalkable(targetIndex)) {

@@ -7,13 +7,10 @@ const finder = new pathfinding.AStarFinder({
 });
 
 const findPath = (start, end) => {
-  const { walkableTileMatrix } = scene.tileMap;
-  const pathGrid = new pathfinding.Grid(walkableTileMatrix);
+  const { pathGrid } = scene.tileMap;
+  const tempPathGrid = pathGrid.clone();
 
-  console.log(pathGrid);
-  console.log(walkableTileMatrix);
-
-  return finder.findPath(start.y, start.x, end.y, end.x, pathGrid);
+  return finder.findPath(start.x, start.y, end.x, end.y, tempPathGrid);
 };
 
 export { findPath };
