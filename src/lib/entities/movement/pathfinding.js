@@ -9,6 +9,9 @@ import { tileWidth, tileHeight } from "../../constants";
 
 const pathfinding = (entity, speed) => {
   const { entityMap } = scene;
+
+  const tileIndexPrevious = {};
+
   let movementAngleRadians = null;
   let targetTile;
   let xDistancePosative;
@@ -18,28 +21,29 @@ const pathfinding = (entity, speed) => {
 
   const move = (delta) => {
     if (entity.isMoving) {
+      const { position, tileIndex, path } = entity;
       const movementSpeed = speed * delta;
 
       const xVelocity = movementSpeed * Math.cos(movementAngleRadians);
       const yVelocity = movementSpeed * Math.sin(movementAngleRadians);
 
       // Moves the entity
-      entity.position.x += xVelocity;
-      entity.position.y += yVelocity;
+      position.x += xVelocity;
+      position.y += yVelocity;
 
-      const xPositionDifference = targetTile.x - entity.position.x;
-      const yPositionDifference = targetTile.y - entity.position.y;
+      const xPositionDifference = targetTile.x - position.x;
+      const yPositionDifference = targetTile.y - position.y;
 
       const xOvershoot = xPositionDifference > 0 !== xDistancePosative;
       const yOvershoot = yPositionDifference > 0 !== yDistancePosative;
 
       // Sets position to destination once it overshoots
       if (xOvershoot || yOvershoot) {
-        entity.position.x = targetTile.x;
-        entity.position.y = targetTile.y;
+        position.x = targetTile.x;
+        position.y = targetTile.y;
 
-        if (entity.path.length > 1) {
-          entity.path.shift();
+        if (path.length > 1) {
+          path.shift();
 
           setMoveTarget();
         } else {
@@ -47,21 +51,29 @@ const pathfinding = (entity, speed) => {
         }
       }
 
-      entityMap.removeEntity({
-        tileIndex: entity.tileIndex,
-        id: entity.id,
-      });
-
       entity.tileIndex = positionToTileIndex({
-        x: entity.position.x + tileWidth / 2,
-        y: entity.position.y + tileHeight / 2,
+        x: position.x + tileWidth / 2,
+        y: position.y + tileHeight / 2,
       });
 
-      entityMap.addEntity({
-        tileIndex: entity.tileIndex,
-        id: entity.id,
-        render: entity.render,
-      });
+      if (
+        tileIndex.x !== tileIndexPrevious.x ||
+        tileIndex.y !== tileIndexPrevious.y
+      ) {
+        entityMap.removeEntity({
+          tileIndex: tileIndexPrevious,
+          id: entity.id,
+        });
+
+        entityMap.addEntity({
+          tileIndex: tileIndex,
+          id: entity.id,
+          render: entity.render,
+        });
+
+        tileIndexPrevious.x = tileIndex.x;
+        tileIndexPrevious.y = tileIndex.y;
+      }
     }
   };
 
@@ -100,6 +112,8 @@ const pathfinding = (entity, speed) => {
       tileIndex.x === entity.tileIndex.x && tileIndex.y === entity.tileIndex.y;
 
     if (!entity.isMoving && !tileIndexIsCurrent && path.length) {
+      tileIndexPrevious.x = entity.tileIndex.x;
+      tileIndexPrevious.y = entity.tileIndex.y;
       entity.path = path;
       entity.path.shift();
       setMoveTarget();

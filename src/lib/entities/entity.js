@@ -16,9 +16,11 @@ class entity {
     };
   }
 
+  afterAdd = () => {};
+
   addToScene = (tileIndex) => {
     const { entityMap } = scene;
-    const { id, render, redraw } = this;
+    const { id, render, redraw, afterAdd } = this;
 
     this.tileIndex = tileIndex;
     this.position = tileIndexToPosition(tileIndex);
@@ -32,7 +34,7 @@ class entity {
     });
 
     scene.entities.push(this);
-
+    afterAdd();
     redraw();
   };
 

@@ -34,7 +34,6 @@ const createEntityMap = (tileMap) => {
 
     if (noEntities) {
       const walkable = tileMap.tiles[x][y].walkable;
-      console.log(walkable);
       setWalkable(tileIndex, walkable);
     }
   };
