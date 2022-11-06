@@ -57,3 +57,4 @@ https://jsbench.me/
 *** Known bugs and issues ***
 - Add a favicon already
 - Some remaining performance issues in FF, I could maybe look at the effects layers?
+- Reorganise path finding for performance. Update walkable tiles one at a time when they change.
