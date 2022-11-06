@@ -10,6 +10,8 @@ const findPath = (start, end) => {
   const { walkableTileMatrix } = scene.tileMap;
   const pathGrid = new pathfinding.Grid(walkableTileMatrix);
 
+  console.log("I RAN");
+
   return finder.findPath(start.y, start.x, end.y, end.x, pathGrid);
 };
 

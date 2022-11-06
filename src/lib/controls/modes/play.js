@@ -38,8 +38,17 @@ playMode.set = () => {
       } else {
         canvasTop.style.cursor = "pointer";
       }
+      if (
+        hoveredTile.tileIndex.x !== hoveredTile.tileIndexPrevious?.x ||
+        hoveredTile.tileIndex.y !== hoveredTile.tileIndexPrevious?.y
+      ) {
+        hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
+      }
 
-      hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
+      hoveredTile.tileIndexPrevious = {
+        x: hoveredTile.tileIndex.x,
+        y: hoveredTile.tileIndex.y,
+      };
     } else {
       canvasTop.style.cursor = "default";
     }
