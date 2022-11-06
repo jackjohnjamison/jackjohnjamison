@@ -24,6 +24,7 @@ playMode.set = () => {
   mouse.onMouseUp = () => {
     if (mouse.buttonCode === 1 && hoveredTile.tileIndex && !mouse.isDragged) {
       player.requestMove(hoveredTile.tileIndex);
+      hoveredTile.path.length = 0;
     }
   };
 
@@ -33,22 +34,25 @@ playMode.set = () => {
     hoveredTile.tileIndex = findHoveredTile({ x: mouse.x, y: mouse.y });
 
     if (hoveredTile.tileIndex) {
-      if (mouse.isDragged) {
-        canvasTop.style.cursor = "grabbing";
-      } else {
-        canvasTop.style.cursor = "pointer";
-      }
       if (
         hoveredTile.tileIndex.x !== hoveredTile.tileIndexPrevious?.x ||
         hoveredTile.tileIndex.y !== hoveredTile.tileIndexPrevious?.y
       ) {
-        hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
-      }
+        if (mouse.isDragged) {
+          canvasTop.style.cursor = "grabbing";
+        } else {
+          canvasTop.style.cursor = "pointer";
+        }
 
-      hoveredTile.tileIndexPrevious = {
-        x: hoveredTile.tileIndex.x,
-        y: hoveredTile.tileIndex.y,
-      };
+        if (!player.isMoving) {
+          hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
+        }
+
+        hoveredTile.tileIndexPrevious = {
+          x: hoveredTile.tileIndex.x,
+          y: hoveredTile.tileIndex.y,
+        };
+      }
     } else {
       canvasTop.style.cursor = "default";
     }
