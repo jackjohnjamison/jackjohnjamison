@@ -67,7 +67,7 @@ const pathfinding = (entity, speed) => {
 
   const unsetPath = () => {
     entity.isMoving = false;
-    entity.path = [];
+    entity.path.length = 0;
   };
 
   const setMoveTarget = () => {

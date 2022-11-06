@@ -23,6 +23,7 @@ https://jackjohnjamison.github.io/tiles/
 - Learn markdown
 
 *** Referances ***
+Pathfinding
 https://www.npmjs.com/package/pathfinding
 
 Isometric game dev stuff
@@ -55,4 +56,4 @@ https://jsbench.me/
 
 *** Known bugs and issues ***
 - Add a favicon already
-- Some remaining performance issues in FF
+- Some remaining performance issues in FF, I could maybe look at the effects layers?
