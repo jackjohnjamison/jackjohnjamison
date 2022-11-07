@@ -21,14 +21,13 @@ const movementMarkers = (hoveredTileIndex) => {
 
   // Breadcrumb state
   if (tileIndexChanged || scene.redrawEffects) {
-    console.log("RUN");
     const { width, height } = canvasTop;
     ctxMid.clearRect(-translate.x, -translate.y, width, height);
     ctxTop.clearRect(-translate.x, -translate.y, width, height);
 
     if (player.isMoving) {
       breadcrumbTrail(player.path, "lime", false, ctxMid);
-      breadcrumbTrail(player.path, "rgba(50, 205, 50, 0.5)", true, ctxTop);
+      breadcrumbTrail(player.path, "rgba(200, 200, 200, 0.8)", true, ctxTop);
     }
 
     if (hoveredTileIndex) {
@@ -49,7 +48,7 @@ const movementMarkers = (hoveredTileIndex) => {
         breadcrumbTrail(hoveredTile.path, "lime", false, ctxMid);
         breadcrumbTrail(
           hoveredTile.path,
-          "rgba(50, 205, 50, 0.5)",
+          "rgba(200, 200, 200, 0.8)",
           false,
           ctxTop
         );

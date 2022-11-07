@@ -50,6 +50,10 @@ canvas {
   .layer-canvas {
     position: absolute;
   }
+
+  #canvasTop {
+    mix-blend-mode: hard-light;
+  }
 }
 
 .monitor {
