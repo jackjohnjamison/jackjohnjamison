@@ -116,8 +116,6 @@ editMode.unset = () => {
   player.unsetPath();
   mouse.onMouseMove = noop;
   mouse.onMouseUp = noop;
-  scene.effectsMiddle = noop;
-  scene.effectsTop = noop;
 };
 
 export { editMode };
