@@ -11,9 +11,20 @@ import { baseMarkerSize, hoveredTileOutlineColor } from "../../constants";
 
 const playMode = {};
 const noop = () => {};
+let redrawEffects = true;
 
 playMode.set = () => {
-  const { hoveredTile, mouse, player, ctxMid, ctxTop, canvasTop } = scene;
+  const {
+    hoveredTile,
+    mouse,
+    player,
+    ctxMid,
+    ctxTop,
+    canvasTop,
+    view: { translate },
+  } = scene;
+
+  console.log(translate);
 
   mouse.onMouseMove = () => {
     if (mouse.buttonCode === 1) {
@@ -34,15 +45,26 @@ playMode.set = () => {
     hoveredTile.tileIndex = findHoveredTile({ x: mouse.x, y: mouse.y });
 
     if (hoveredTile.tileIndex) {
-      if (
+      const tileIndexChanged =
         hoveredTile.tileIndex.x !== hoveredTile.tileIndexPrevious?.x ||
-        hoveredTile.tileIndex.y !== hoveredTile.tileIndexPrevious?.y
-      ) {
+        hoveredTile.tileIndex.y !== hoveredTile.tileIndexPrevious?.y;
+
+      // Cursor state
+
+      if (tileIndexChanged) {
         if (mouse.isDragged) {
           canvasTop.style.cursor = "grabbing";
         } else {
           canvasTop.style.cursor = "pointer";
         }
+      }
+
+      // Breadcrumb state
+      if (tileIndexChanged || redrawEffects) {
+        const { width, height } = canvasTop;
+        ctxMid.clearRect(-translate.x, -translate.y, width, height);
+        ctxTop.clearRect(-translate.x, -translate.y, width, height);
+        console.log("I RAN");
 
         if (!player.isMoving) {
           hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
@@ -52,54 +74,47 @@ playMode.set = () => {
           x: hoveredTile.tileIndex.x,
           y: hoveredTile.tileIndex.y,
         };
+
+        redrawEffects = false;
+
+        // scene.effectsMiddle
+        if (player.isMoving) {
+          breadcrumbTrail(player.path, "lime", false, ctxMid);
+        } else if (hoveredTile.tileIndex) {
+          breadcrumbTrail(hoveredTile.path, "lime", false, ctxMid);
+        }
+
+        // scene.effectsTop
+        if (player.isMoving) {
+          breadcrumbTrail(player.path, "rgba(50, 205, 50, 0.5)", true, ctxTop);
+          if (isWalkable(hoveredTile.tileIndex)) {
+            const position = tileIndexToPosition(hoveredTile.tileIndex);
+            drawEllipse(
+              position,
+              hoveredTileOutlineColor,
+              baseMarkerSize,
+              ctxTop
+            );
+          } else {
+            highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
+          }
+        } else {
+          breadcrumbTrail(
+            hoveredTile.path,
+            "rgba(50, 205, 50, 0.5)",
+            false,
+            ctxTop
+          );
+          if (isWalkable(hoveredTile.tileIndex)) {
+            const position = tileIndexToPosition(hoveredTile.tileIndex);
+            drawEllipse(position, "lime", baseMarkerSize, ctxTop);
+          } else {
+            highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
+          }
+        }
       }
     } else {
       canvasTop.style.cursor = "default";
-    }
-  };
-
-  scene.effectsMiddle = () => {
-    if (player.isMoving) {
-      breadcrumbTrail(player.path, "lime", false, ctxMid);
-    } else if (hoveredTile.tileIndex) {
-      breadcrumbTrail(hoveredTile.path, "lime", false, ctxMid);
-    }
-  };
-
-  scene.effectsTop = () => {
-    if (player.isMoving) {
-      breadcrumbTrail(player.path, "rgba(50, 205, 50, 0.5)", true, ctxTop);
-
-      if (hoveredTile.tileIndex) {
-        // Can we stop this recalculating or redrawing when the mouse isn't moving?
-        if (isWalkable(hoveredTile.tileIndex)) {
-          const position = tileIndexToPosition(hoveredTile.tileIndex);
-          drawEllipse(
-            position,
-            hoveredTileOutlineColor,
-            baseMarkerSize,
-            ctxTop
-          );
-        } else {
-          highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
-        }
-      }
-    } else if (hoveredTile.tileIndex) {
-      breadcrumbTrail(
-        hoveredTile.path,
-        "rgba(50, 205, 50, 0.5)",
-        false,
-        ctxTop
-      );
-
-      if (hoveredTile.tileIndex) {
-        if (isWalkable(hoveredTile.tileIndex)) {
-          const position = tileIndexToPosition(hoveredTile.tileIndex);
-          drawEllipse(position, "lime", baseMarkerSize, ctxTop);
-        } else {
-          highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
-        }
-      }
     }
   };
 };

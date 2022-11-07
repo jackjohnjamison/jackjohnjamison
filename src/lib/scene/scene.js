@@ -35,10 +35,6 @@ scene.start = async (map) => {
   scene.ctxTop = scene.canvasTop.getContext("2d");
 
   scene.monitor = frameRateMonitor();
-
-  scene.effectsMiddle = () => {};
-  scene.effectsTop = () => {};
-
   scene.mouse = mouseTracker(scene.canvasTop);
 
   scene.view = setView({

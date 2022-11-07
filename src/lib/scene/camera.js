@@ -31,11 +31,8 @@ const panCameraKeys = (delta) => {
     translate.x !== translatePrevious.x ||
     translate.y !== translatePrevious.y
   ) {
-    floorCanvas.style.left = `${translate.x}px`;
-    floorCanvas.style.top = `${translate.y}px`;
-
-    entityCanvas.style.left = `${translate.x}px`;
-    entityCanvas.style.top = `${translate.y}px`;
+    floorCanvas.style.left = entityCanvas.style.left = `${translate.x}px`;
+    floorCanvas.style.top = entityCanvas.style.top = `${translate.y}px`;
 
     ctxMid.setTransform(1, 0, 0, 1, translate.x, translate.y);
     ctxTop.setTransform(1, 0, 0, 1, translate.x, translate.y);
