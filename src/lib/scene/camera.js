@@ -39,6 +39,8 @@ const panCameraKeys = (delta) => {
 
     translatePrevious.x = translate.x;
     translatePrevious.y = translate.y;
+
+    scene.redrawEffects = true;
   }
 
   velocityX *= friction;

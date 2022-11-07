@@ -44,8 +44,8 @@ const pathfinding = (entity, speed) => {
 
         if (path.length > 1) {
           path.shift();
-
           setMoveTarget();
+          scene.redrawEffects = true;
         } else {
           entity.isMoving = false;
         }
@@ -102,6 +102,7 @@ const pathfinding = (entity, speed) => {
       );
     } else {
       unsetPath();
+      scene.redrawEffects = true;
     }
   };
 

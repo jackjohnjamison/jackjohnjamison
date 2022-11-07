@@ -37,6 +37,8 @@ scene.start = async (map) => {
   scene.monitor = frameRateMonitor();
   scene.mouse = mouseTracker(scene.canvasTop);
 
+  scene.redrawEffects = true;
+
   scene.view = setView({
     xTiles: mapSize,
     yTiles: mapSize,

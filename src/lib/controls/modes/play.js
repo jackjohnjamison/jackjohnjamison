@@ -11,7 +11,6 @@ import { baseMarkerSize, hoveredTileOutlineColor } from "../../constants";
 
 const playMode = {};
 const noop = () => {};
-let redrawEffects = true;
 
 playMode.set = () => {
   const {
@@ -24,8 +23,6 @@ playMode.set = () => {
     view: { translate },
   } = scene;
 
-  console.log(translate);
-
   mouse.onMouseMove = () => {
     if (mouse.buttonCode === 1) {
       panCameraTo(-mouse.drag.x, -mouse.drag.y);
@@ -36,6 +33,7 @@ playMode.set = () => {
     if (mouse.buttonCode === 1 && hoveredTile.tileIndex && !mouse.isDragged) {
       player.requestMove(hoveredTile.tileIndex);
       hoveredTile.path.length = 0;
+      scene.redrawEffects = true;
     }
   };
 
@@ -50,43 +48,22 @@ playMode.set = () => {
         hoveredTile.tileIndex.y !== hoveredTile.tileIndexPrevious?.y;
 
       // Cursor state
-
-      if (tileIndexChanged) {
-        if (mouse.isDragged) {
-          canvasTop.style.cursor = "grabbing";
-        } else {
-          canvasTop.style.cursor = "pointer";
-        }
+      if (mouse.isDragged) {
+        canvasTop.style.cursor = "grabbing";
+      } else {
+        canvasTop.style.cursor = "pointer";
       }
 
       // Breadcrumb state
-      if (tileIndexChanged || redrawEffects) {
+      if (tileIndexChanged || scene.redrawEffects) {
         const { width, height } = canvasTop;
         ctxMid.clearRect(-translate.x, -translate.y, width, height);
         ctxTop.clearRect(-translate.x, -translate.y, width, height);
-        console.log("I RAN");
 
-        if (!player.isMoving) {
-          hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
-        }
-
-        hoveredTile.tileIndexPrevious = {
-          x: hoveredTile.tileIndex.x,
-          y: hoveredTile.tileIndex.y,
-        };
-
-        redrawEffects = false;
-
-        // scene.effectsMiddle
         if (player.isMoving) {
           breadcrumbTrail(player.path, "lime", false, ctxMid);
-        } else if (hoveredTile.tileIndex) {
-          breadcrumbTrail(hoveredTile.path, "lime", false, ctxMid);
-        }
-
-        // scene.effectsTop
-        if (player.isMoving) {
           breadcrumbTrail(player.path, "rgba(50, 205, 50, 0.5)", true, ctxTop);
+
           if (isWalkable(hoveredTile.tileIndex)) {
             const position = tileIndexToPosition(hoveredTile.tileIndex);
             drawEllipse(
@@ -99,6 +76,9 @@ playMode.set = () => {
             highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
           }
         } else {
+          hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
+
+          breadcrumbTrail(hoveredTile.path, "lime", false, ctxMid);
           breadcrumbTrail(
             hoveredTile.path,
             "rgba(50, 205, 50, 0.5)",
@@ -112,6 +92,12 @@ playMode.set = () => {
             highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
           }
         }
+
+        hoveredTile.tileIndexPrevious = {
+          x: hoveredTile.tileIndex.x,
+          y: hoveredTile.tileIndex.y,
+        };
+        scene.redrawEffects = false;
       }
     } else {
       canvasTop.style.cursor = "default";
