@@ -1,6 +1,6 @@
 // This import is needed for JSX
 import { h, Fragment } from "start-dom-jsx";
-import { scene, renderLoop } from "../lib/scene"
+import { scene } from "../lib/scene"
 import { TilePainter } from "./tile-painter"
 
 const UI = () => {
