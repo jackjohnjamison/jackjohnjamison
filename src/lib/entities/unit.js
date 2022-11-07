@@ -1,4 +1,3 @@
-import { scene } from "../scene";
 import { entity } from "./entity";
 import { sprites } from "../sprites";
 import { pathfinding } from "./movement/pathfinding";
@@ -14,14 +13,8 @@ class unit extends entity {
 
     const pathFinder = pathfinding(this, pathMovementSpeed);
 
-    const movement = {
-      // Duplicated path finding move while contructing a new option
-      editMode: pathFinder.move,
-      playMode: pathFinder.move,
-    };
-
     this.update = (delta) => {
-      movement[scene.mode](delta);
+      pathFinder.move(delta);
       this.redraw();
     };
 

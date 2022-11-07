@@ -4,20 +4,26 @@ import { resetBrushes } from "../../../jsx/tile-painter";
 import {
   findHoveredTile,
   paintTile,
+  isWalkable,
+  tileIndexToPosition,
   unsetTileLock,
   highlightTile,
 } from "../../map";
-import {
-  hoveredTileOutlineColor,
-  pathTileOutlineColor,
-  pathTileUnderOutlineColor,
-} from "../../constants";
+import { breadcrumbTrail, drawEllipse } from "../../effects";
+import { hoveredTileOutlineColor, baseMarkerSize, noop } from "../../constants";
 
 const editMode = {};
-const noop = () => {};
 
 editMode.set = () => {
-  const { hoveredTile, mouse, player, canvasTop } = scene;
+  const {
+    hoveredTile,
+    mouse,
+    player,
+    ctxMid,
+    ctxTop,
+    canvasTop,
+    view: { translate },
+  } = scene;
 
   // Sets initial state of the tile painter UI
   resetBrushes();
@@ -41,41 +47,66 @@ editMode.set = () => {
     hoveredTile.tileIndex = findHoveredTile({ x: mouse.x, y: mouse.y });
 
     if (hoveredTile.tileIndex) {
+      if (mouse.buttonCode === 3) paintTile(hoveredTile.tileIndex);
+
+      const tileIndexChanged =
+        hoveredTile.tileIndex.x !== hoveredTile.tileIndexPrevious?.x ||
+        hoveredTile.tileIndex.y !== hoveredTile.tileIndexPrevious?.y;
+
+      // Cursor state
       if (mouse.isDragged) {
         canvasTop.style.cursor = "grabbing";
       } else {
         canvasTop.style.cursor = "pointer";
       }
 
-      hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
+      // Breadcrumb state
+      if (tileIndexChanged || scene.redrawEffects) {
+        const { width, height } = canvasTop;
+        ctxMid.clearRect(-translate.x, -translate.y, width, height);
+        ctxTop.clearRect(-translate.x, -translate.y, width, height);
 
-      if (mouse.buttonCode === 3) paintTile(hoveredTile.tileIndex);
+        if (player.isMoving) {
+          breadcrumbTrail(player.path, "lime", false, ctxMid);
+          breadcrumbTrail(player.path, "rgba(50, 205, 50, 0.5)", true, ctxTop);
+
+          if (isWalkable(hoveredTile.tileIndex)) {
+            const position = tileIndexToPosition(hoveredTile.tileIndex);
+            drawEllipse(
+              position,
+              hoveredTileOutlineColor,
+              baseMarkerSize,
+              ctxTop
+            );
+          } else {
+            highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
+          }
+        } else {
+          hoveredTile.path = findPath(player.tileIndex, hoveredTile.tileIndex);
+
+          breadcrumbTrail(hoveredTile.path, "lime", false, ctxMid);
+          breadcrumbTrail(
+            hoveredTile.path,
+            "rgba(50, 205, 50, 0.5)",
+            false,
+            ctxTop
+          );
+          if (isWalkable(hoveredTile.tileIndex)) {
+            const position = tileIndexToPosition(hoveredTile.tileIndex);
+            drawEllipse(position, "lime", baseMarkerSize, ctxTop);
+          } else {
+            highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
+          }
+        }
+
+        hoveredTile.tileIndexPrevious = {
+          x: hoveredTile.tileIndex.x,
+          y: hoveredTile.tileIndex.y,
+        };
+        scene.redrawEffects = false;
+      }
     } else {
       canvasTop.style.cursor = "default";
-    }
-  };
-
-  scene.effectsMiddle = () => {
-    if (hoveredTile.tileIndex) {
-      hoveredTile.path.forEach((tileIndex) => {
-        highlightTile(
-          { x: tileIndex[0], y: tileIndex[1] },
-          pathTileOutlineColor
-        );
-      });
-    }
-  };
-
-  scene.effectsTop = () => {
-    if (hoveredTile.tileIndex) {
-      hoveredTile.path.forEach((tileIndex) => {
-        highlightTile(
-          { x: tileIndex[0], y: tileIndex[1] },
-          pathTileUnderOutlineColor
-        );
-      });
-
-      highlightTile(hoveredTile.tileIndex, hoveredTileOutlineColor);
     }
   };
 };

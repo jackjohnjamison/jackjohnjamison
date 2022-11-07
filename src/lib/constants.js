@@ -12,8 +12,6 @@ export const //
   // Colours
   hoveredTileColor = "rgba(255,255,255,0.1)",
   hoveredTileOutlineColor = "rgba(255,255,0,0.6)",
-  pathTileOutlineColor = "yellow",
-  pathTileUnderOutlineColor = "rgba(255,0,0,0.2)",
   defaultHaloColor = "yellow",
   //
   // Physics variables
@@ -27,4 +25,7 @@ export const //
   centerOffsetY = tileHeight / 2,
   tileRatio = tileHeight / tileWidth,
   radians360 = 6.28319,
-  baseMarkerSize = 20;
+  baseMarkerSize = 20,
+  //
+  // No operation dummy function
+  noop = () => {};

@@ -7,10 +7,9 @@ import {
   highlightTile,
 } from "../../map";
 import { breadcrumbTrail, drawEllipse } from "../../effects";
-import { baseMarkerSize, hoveredTileOutlineColor } from "../../constants";
+import { baseMarkerSize, hoveredTileOutlineColor, noop } from "../../constants";
 
 const playMode = {};
-const noop = () => {};
 
 playMode.set = () => {
   const {
