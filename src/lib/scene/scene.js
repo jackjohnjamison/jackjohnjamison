@@ -47,7 +47,6 @@ scene.start = async (map) => {
   scene.hoveredTile = {
     path: null,
     tileIndex: null,
-    tileIndexPrevious: null,
   };
 
   scene.mode = "playMode";

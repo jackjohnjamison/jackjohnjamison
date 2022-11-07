@@ -1,3 +1,4 @@
+import { scene } from "../scene";
 import { entity } from "./entity";
 import { sprites } from "../sprites";
 import { pathfinding } from "./movement/pathfinding";
@@ -11,7 +12,11 @@ class unit extends entity {
     });
     this.path = [];
 
-    const pathFinder = pathfinding(this, pathMovementSpeed);
+    const movementStep = () => {
+      scene.redrawEffects = true;
+    };
+
+    const pathFinder = pathfinding(this, pathMovementSpeed, movementStep);
 
     this.update = (delta) => {
       pathFinder.move(delta);

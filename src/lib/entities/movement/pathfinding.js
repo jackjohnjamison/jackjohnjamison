@@ -5,9 +5,9 @@ import {
   tileIndexToPosition,
   isWalkable,
 } from "../../map";
-import { tileWidth, tileHeight } from "../../constants";
+import { tileWidth, tileHeight, noop } from "../../constants";
 
-const pathfinding = (entity, speed) => {
+const pathfinding = (entity, speed, step = noop) => {
   const { entityMap } = scene;
 
   const tileIndexPrevious = {};
@@ -45,10 +45,10 @@ const pathfinding = (entity, speed) => {
         if (path.length > 1) {
           path.shift();
           setMoveTarget();
-          scene.redrawEffects = true;
+          step();
         } else {
           entity.isMoving = false;
-          scene.redrawEffects = true;
+          step();
         }
       }
 
@@ -103,7 +103,7 @@ const pathfinding = (entity, speed) => {
       );
     } else {
       unsetPath();
-      scene.redrawEffects = true;
+      step();
     }
   };
 
@@ -120,7 +120,7 @@ const pathfinding = (entity, speed) => {
       entity.path.shift();
       setMoveTarget();
       entity.isMoving = true;
-      scene.redrawEffects = true;
+      step();
     }
   };
 
