@@ -12,7 +12,7 @@ const Root = () => {
         <canvas class="layer-canvas" id="canvasMid" />
         <canvas class="layer-canvas" id="entityCanvas" />
         <canvas class="layer-canvas" id="canvasTop" />
-        <div id="ui" />
+        <div id="uiMount" />
         <PauseMenu />
       </div>
     </div>

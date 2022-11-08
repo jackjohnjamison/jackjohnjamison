@@ -1,5 +1,5 @@
 import { scene } from "../scene";
-import { resetUI } from "../../jsx/ui";
+import { createShadowUI } from "../../jsx/ui";
 import { renderLoop } from "../scene";
 import { keyCheck, resetKeys, keyEventFunctions } from "./key-check";
 import { editMode } from "./modes/edit";
@@ -59,7 +59,12 @@ const modes = {
   playMode,
 };
 
+let resetUI;
+
 const setMode = (mode) => {
+  if (!resetUI) {
+    resetUI = createShadowUI();
+  }
   modes[scene.mode].unset();
   scene.mode = mode;
   resetUI();

@@ -15,6 +15,13 @@ const UI = () => {
   );
 };
 
-const resetUI = () => { ui.replaceWith(UI()) };
+const createShadowUI = () => {
+  const shadowUI = document.getElementById("uiMount").attachShadow({ mode: "open" });
+  shadowUI.appendChild(UI())
 
-export { resetUI };
+  return () => {
+    shadowUI.getElementById("ui").replaceWith(UI())
+  }
+}
+
+export { createShadowUI };
