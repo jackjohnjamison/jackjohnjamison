@@ -6,7 +6,7 @@ import { sprites } from "../lib/sprites"
 
 /* 
 * This is all a bit of a mess and could probably use another look
-* for improvments at some point.
+* for improvments at some point. Seriously it is ugly.
 */
 
 // Styling pixel widths
