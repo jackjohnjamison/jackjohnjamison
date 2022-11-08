@@ -1,5 +1,6 @@
 // This import is needed for JSX
 import { h, Fragment } from "start-dom-jsx";
+import { scene } from "../lib/scene";
 import { tileTypes } from "../lib/map/"
 import { sprites } from "../lib/sprites"
 
@@ -25,7 +26,7 @@ const resetBrushes = (e) => {
   selectedTileSet = e?.target.value || selectedTileSet;
   selectedSetType = tileTypes[selectedTileSet].type
   selectedTileSetSprites = sprites[selectedTileSet]
-  spriteDisplay.replaceWith(SpriteDisplay());
+  scene.shadowUI.getElementById("spriteDisplay").replaceWith(SpriteDisplay());
 
   if(selectedSetType !== "void") {
     hueRotate()
@@ -69,19 +70,20 @@ const findSpriteSize = () => {
 }
 
 const hueRotate = () => {
+  const tilePainter = scene.shadowUI.getElementById("tilePainter")
   const inputs = tilePainter.elements;
 
   Object.keys(tileSets).forEach((type) => {
     const tileSet = tileSets[type]
     const slider = inputs[ `${ type }Hue` ]
-    const display = document.getElementById(`${ type }HueRotaion`)
+    const display = scene.shadowUI.getElementById(`${ type }HueRotaion`)
     const hue = slider.value;
     
     display.innerText = spriteHue[tileSet] = hue
   
     sprites[tileSet].forEach((n, i) => {
       // Finding the elements by id could likely be improved
-      const canvas = document.getElementById(`tileCanv${i}`)
+      const canvas = scene.shadowUI.getElementById(`tileCanv${i}`)
       const ctx = canvas.getContext("2d")
       ctx.filter = `hue-rotate(${hue}deg)`;
       const image = sprites[tileSet][i].data 
@@ -199,6 +201,7 @@ const TilePainter = () => {
 };
 
 const getBrushSelection = () => {
+  const tilePainter = scene.shadowUI.getElementById("tilePainter")
   const inputs = tilePainter.elements;
 
   const colors = {}
@@ -214,7 +217,7 @@ const getBrushSelection = () => {
   }
 
   return {
-    set: terrainType.value,
+    set: scene.shadowUI.getElementById("terrainType").value,
     type: selectedSetType,
     variant,
     colors,

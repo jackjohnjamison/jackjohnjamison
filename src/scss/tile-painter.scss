@@ -17,6 +17,11 @@ $color1: #639;
   -webkit-text-size-adjust: 100%;
 }
 
+button, input, select, label {
+  cursor: pointer;
+  margin: 2px;
+}
+
 #ui {
   position: absolute;
   left: 0;
