@@ -20,6 +20,17 @@ scene.start = async (map) => {
   scene.canvasRoot = Root();
   root.replaceWith(scene.canvasRoot);
 
+  scene.shadowUI = document
+    .getElementById("uiMount")
+    .attachShadow({ mode: "open" });
+
+  const tilePainterStyles = document.getElementById("tilePainterStyles");
+  scene.shadowUI.appendChild(tilePainterStyles);
+
+  const ui = document.createElement("div");
+  ui.setAttribute("id", "ui");
+  scene.shadowUI.appendChild(ui);
+
   scene.floorCanvas = document.getElementById("floorCanvas");
   scene.floorCtx = scene.floorCanvas.getContext("2d", { alpha: false });
 
