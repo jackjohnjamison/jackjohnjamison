@@ -16,7 +16,7 @@ const paintTile = (tileIndex) => {
 
     // Make sure no entites are currently in the tile
     const entityAddress = scene.entityMap.entities[tileIndex.x][tileIndex.y];
-    const entities = Object.keys(entityAddress).length !== 0;
+    const entities = entityAddress.length !== 0;
     const illegalTileChange = entities && type !== "floor";
 
     if (!illegalTileChange) {
