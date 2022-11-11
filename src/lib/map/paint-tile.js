@@ -15,9 +15,8 @@ const paintTile = (tileIndex) => {
     const { set, colors, variant, type } = brushSelection;
 
     // Make sure no entites are currently in the tile
-    const entityAddress = scene.entityMap.entities[tileIndex.x][tileIndex.y];
-    const entities = entityAddress.length !== 0;
-    const illegalTileChange = entities && type !== "floor";
+    const entity = scene.entityMap.entities[tileIndex.x][tileIndex.y];
+    const illegalTileChange = entity && type !== "floor";
 
     if (!illegalTileChange) {
       setTile(tileIndex, tileMap, set, colors, variant);

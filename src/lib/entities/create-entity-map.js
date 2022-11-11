@@ -18,10 +18,6 @@ const createEntityMap = (tileMap) => {
     entityMap.entities[tileIndex.x][tileIndex.y] = render;
   };
 
-  entityMap.entityCheck = ({ x, y }) => {
-    return entityMap.entities[x][y] !== null;
-  };
-
   entityMap.removeEntity = ({ tileIndex }) => {
     const { x, y } = tileIndex;
     entityMap.entities[x][y] = null;
