@@ -13,9 +13,9 @@ const renderEntities = (x, y) => {
 
     const entityMapLocation = entityMap.entities[x][y];
 
-    entityMapLocation.forEach((entity) => {
-      entity.render();
-    });
+    if (entityMapLocation) {
+      entityMapLocation();
+    }
 
     if (feature) {
       const { set, color, variant } = feature;
@@ -26,11 +26,11 @@ const renderEntities = (x, y) => {
         position.y - image.yOffset
       );
 
-      scene.entityCtx.globalAlpha = 0.5;
-      entityMapLocation.forEach((entity) => {
-        entity.render();
-      });
-      scene.entityCtx.globalAlpha = 1;
+      if (entityMapLocation) {
+        scene.entityCtx.globalAlpha = 0.5;
+        entityMapLocation();
+        scene.entityCtx.globalAlpha = 1;
+      }
     }
   }
 };

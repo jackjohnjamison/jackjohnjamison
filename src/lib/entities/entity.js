@@ -1,6 +1,6 @@
 import { scene, redrawEntities } from "../scene";
 import { getId } from "../utilities";
-import { tileIndexToPosition } from "../map";
+import { tileIndexToPosition, setWalkable } from "../map";
 import { sprites } from "../sprites";
 import { drawEllipse } from "../effects";
 import { defaultHaloColor, baseMarkerSize } from "../constants";
@@ -29,9 +29,10 @@ class entity {
 
     entityMap.addEntity({
       tileIndex,
-      id,
       render,
     });
+
+    setWalkable(tileIndex, false);
 
     scene.entities.push(this);
     afterAdd();

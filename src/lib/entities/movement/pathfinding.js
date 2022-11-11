@@ -4,6 +4,7 @@ import {
   positionToTileIndex,
   tileIndexToPosition,
   isWalkable,
+  setWalkable,
 } from "../../map";
 import { tileWidth, tileHeight, noop } from "../../constants";
 
@@ -63,12 +64,12 @@ const pathfinding = (entity, speed, step = noop) => {
       ) {
         entityMap.removeEntity({
           tileIndex: tileIndexPrevious,
-          id: entity.id,
         });
+
+        setWalkable(tileIndexPrevious, true);
 
         entityMap.addEntity({
           tileIndex: tileIndex,
-          id: entity.id,
           render: entity.render,
         });
 
@@ -90,6 +91,7 @@ const pathfinding = (entity, speed, step = noop) => {
 
     if (isWalkable(targetIndex)) {
       targetTile = tileIndexToPosition(targetIndex);
+      setWalkable(targetIndex, false);
 
       const xPositionDifference = targetTile.x - entity.position.x;
       const yPositionDifference = targetTile.y - entity.position.y;

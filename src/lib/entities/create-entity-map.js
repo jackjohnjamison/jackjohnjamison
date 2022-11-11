@@ -1,5 +1,4 @@
 import { setWalkable } from "../map";
-import { entity } from "./entity";
 
 const createEntityMap = (tileMap) => {
   const entityMap = {};
@@ -11,34 +10,21 @@ const createEntityMap = (tileMap) => {
     entityMap.entities[x] = [];
 
     for (let y = 0; y < yTiles; y++) {
-      entityMap.entities[x][y] = [];
+      entityMap.entities[x][y] = null;
     }
   }
 
-  entityMap.addEntity = ({ tileIndex, id, render }) => {
-    entityMap.entities[tileIndex.x][tileIndex.y].push({ id, render });
-
-    setWalkable(tileIndex, false);
+  entityMap.addEntity = ({ tileIndex, render }) => {
+    entityMap.entities[tileIndex.x][tileIndex.y] = render;
   };
 
   entityMap.entityCheck = ({ x, y }) => {
-    return entityMap.entities[x][y].length === 0;
+    return entityMap.entities[x][y] !== null;
   };
 
-  entityMap.removeEntity = ({ tileIndex, id }) => {
+  entityMap.removeEntity = ({ tileIndex }) => {
     const { x, y } = tileIndex;
-    const entityAddress = entityMap.entities[x][y];
-    entityAddress.forEach((entry, i) => {
-      if (entry.id === id) {
-        entityAddress.splice(i, 1);
-      }
-    });
-    const noEntities = entityAddress.length === 0;
-
-    if (noEntities) {
-      const walkable = tileMap.tiles[x][y].walkable;
-      setWalkable(tileIndex, walkable);
-    }
+    entityMap.entities[x][y] = null;
   };
 
   return entityMap;
