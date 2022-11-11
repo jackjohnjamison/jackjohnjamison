@@ -1,5 +1,3 @@
-import { setWalkable } from "../map";
-
 const createEntityMap = (tileMap) => {
   const entityMap = {};
   entityMap.entities = [];
